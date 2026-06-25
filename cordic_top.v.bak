@@ -1,0 +1,24 @@
+module cordic_top # (parameter IN_WIDTH = 12,
+                     parameter OUT_WIDTH = 16)
+                    (input clk,
+                     input signed [IN_WIDTH-1:0] x_in,
+							input signed [IN_WIDTH-1:0] y_in,
+						   input signed [IN_WIDTH-1:0] z_in,
+							output reg signed [OUT_WIDTH-1:0] x_out,
+							output reg signed [OUT_WIDTH-1:0] y_out,
+							output reg signed [OUT_WIDTH-1:0] z_out);
+							
+wire [IN_WIDTH-1:0] x [OUT_WIDTH-1:0];
+wire [IN_WIDTH-1:0] y [OUT_WIDTH-1:0];
+wire [IN_WIDTH-1:0] z [OUT_WIDTH-1:0];
+
+cordic_stage stage1 (.clk(clk), .x_in(x_in), .Y_in(y_in), .z_in(0), .x_out(x[0]), .y_out(y[0]), .z_out(z[0]));
+
+genvar k;
+   for(k = 0, k < 12; k = k + 1) begin
+      cordic_stage # (.IN_WIDTH(16), .OUT_WIDTH(16)) stage
+	                  (.clk(clk), .x_in(x[k]), .Y_in(y[k]), .z_in(z[k]), .x_out(x[k+1]), .y_out(y[k+1]), .z_out(z[k+1]);
+   end
+endgenerate 
+
+

@@ -1,0 +1,10 @@
+module calibration (input signed [47:0] datain_a,
+                    input signed [47:0] datain_b,
+						  output signed [29:0] dataout_a,
+						  output signed [29:0] dataout_b);
+
+assign dataout_a = datain_a >>> 10;
+assign dataout_b = datain_b >>> 10;
+
+endmodule;	  
+					

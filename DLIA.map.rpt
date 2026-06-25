@@ -1,0 +1,1928 @@
+Analysis & Synthesis report for DLIA
+Thu Jun 25 17:57:37 2026
+Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. Analysis & Synthesis RAM Summary
+  9. Analysis & Synthesis DSP Block Usage Summary
+ 10. Analysis & Synthesis IP Cores Summary
+ 11. Registers Removed During Synthesis
+ 12. Removed Registers Triggering Further Register Optimizations
+ 13. General Register Statistics
+ 14. Inverted Register Statistics
+ 15. Registers Packed Into Inferred Megafunctions
+ 16. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 17. Source assignments for lut_sincos:dds|altsyncram:sine_lut_rtl_0|altsyncram_1sq1:auto_generated
+ 18. Parameter Settings for User Entity Instance: phase_locked_loop:p_ll|altpll:altpll_component
+ 19. Parameter Settings for User Entity Instance: data_delay_block:delay
+ 20. Parameter Settings for User Entity Instance: lut_sincos:dds
+ 21. Parameter Settings for User Entity Instance: multiplier:sine_mix
+ 22. Parameter Settings for User Entity Instance: multiplier:cosine_mix
+ 23. Parameter Settings for User Entity Instance: cordic_top:CORDIC
+ 24. Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:stage1
+ 25. Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[0].stage_inst
+ 26. Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[1].stage_inst
+ 27. Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[2].stage_inst
+ 28. Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[3].stage_inst
+ 29. Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[4].stage_inst
+ 30. Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[5].stage_inst
+ 31. Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[6].stage_inst
+ 32. Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[7].stage_inst
+ 33. Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[8].stage_inst
+ 34. Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[9].stage_inst
+ 35. Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[10].stage_inst
+ 36. Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[11].stage_inst
+ 37. Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[12].stage_inst
+ 38. Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[13].stage_inst
+ 39. Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[14].stage_inst
+ 40. Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[15].stage_inst
+ 41. Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[16].stage_inst
+ 42. Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[17].stage_inst
+ 43. Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[18].stage_inst
+ 44. Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[19].stage_inst
+ 45. Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[20].stage_inst
+ 46. Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[21].stage_inst
+ 47. Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[22].stage_inst
+ 48. Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[23].stage_inst
+ 49. Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[24].stage_inst
+ 50. Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[25].stage_inst
+ 51. Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[26].stage_inst
+ 52. Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[27].stage_inst
+ 53. Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[28].stage_inst
+ 54. Parameter Settings for Inferred Entity Instance: lut_sincos:dds|altsyncram:sine_lut_rtl_0
+ 55. Parameter Settings for Inferred Entity Instance: cordic_top:CORDIC|cordic_stage:stage1|lpm_add_sub:Add0
+ 56. Parameter Settings for Inferred Entity Instance: cordic_top:CORDIC|cordic_stage:stage1|lpm_add_sub:Add0
+ 57. Parameter Settings for Inferred Entity Instance: multiplier:cosine_mix|lpm_mult:Mult0
+ 58. Parameter Settings for Inferred Entity Instance: multiplier:sine_mix|lpm_mult:Mult0
+ 59. altpll Parameter Settings by Entity Instance
+ 60. altsyncram Parameter Settings by Entity Instance
+ 61. lpm_mult Parameter Settings by Entity Instance
+ 62. Port Connectivity Checks: "cordic_top:CORDIC"
+ 63. Port Connectivity Checks: "integrate_and_dump:cosine_filter"
+ 64. Port Connectivity Checks: "integrate_and_dump:sine_filter"
+ 65. Port Connectivity Checks: "multiplier:cosine_mix"
+ 66. Port Connectivity Checks: "multiplier:sine_mix"
+ 67. Port Connectivity Checks: "lut_sincos:dds"
+ 68. Port Connectivity Checks: "data_delay_block:delay"
+ 69. Port Connectivity Checks: "spi_interface:afe"
+ 70. Port Connectivity Checks: "frequency_tracker_sync:comb_3"
+ 71. Elapsed Time Per Partition
+ 72. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2013 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++--------------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                         ;
++------------------------------------+-------------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Thu Jun 25 17:57:37 2026           ;
+; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
+; Revision Name                      ; DLIA                                            ;
+; Top-level Entity Name              ; DLIA                                            ;
+; Family                             ; Cyclone IV E                                    ;
+; Total logic elements               ; 4,855                                           ;
+;     Total combinational functions  ; 4,626                                           ;
+;     Dedicated logic registers      ; 3,135                                           ;
+; Total registers                    ; 3135                                            ;
+; Total pins                         ; 116                                             ;
+; Total virtual pins                 ; 0                                               ;
+; Total memory bits                  ; 12,288                                          ;
+; Embedded Multiplier 9-bit elements ; 4                                               ;
+; Total PLLs                         ; 1                                               ;
++------------------------------------+-------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                        ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                     ; Setting            ; Default Value      ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                     ; EP4CE22F17C6       ;                    ;
+; Top-level entity name                                                      ; DLIA               ; DLIA               ;
+; Family name                                                                ; Cyclone IV E       ; Cyclone IV GX      ;
+; Use smart compilation                                                      ; Off                ; Off                ;
+; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                                ; Off                ; Off                ;
+; Restructure Multiplexers                                                   ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                                        ; Off                ; Off                ;
+; Preserve fewer node names                                                  ; On                 ; On                 ;
+; Disable OpenCore Plus hardware evaluation                                  ; Off                ; Off                ;
+; Verilog Version                                                            ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                               ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                                   ; Auto               ; Auto               ;
+; Safe State Machine                                                         ; Off                ; Off                ;
+; Extract Verilog State Machines                                             ; On                 ; On                 ;
+; Extract VHDL State Machines                                                ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                          ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                 ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                             ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                    ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                                  ; On                 ; On                 ;
+; Parallel Synthesis                                                         ; On                 ; On                 ;
+; DSP Block Balancing                                                        ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                                         ; On                 ; On                 ;
+; Power-Up Don't Care                                                        ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                               ; Off                ; Off                ;
+; Remove Duplicate Registers                                                 ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                       ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                     ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                      ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                  ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                       ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                        ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                             ; Off                ; Off                ;
+; Optimization Technique                                                     ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                         ; 70                 ; 70                 ;
+; Auto Carry Chains                                                          ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                       ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                      ; Off                ; Off                ;
+; Auto ROM Replacement                                                       ; On                 ; On                 ;
+; Auto RAM Replacement                                                       ; On                 ; On                 ;
+; Auto DSP Block Replacement                                                 ; On                 ; On                 ;
+; Auto Shift Register Replacement                                            ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                            ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                              ; On                 ; On                 ;
+; Strict RAM Replacement                                                     ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                          ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                     ; Off                ; Off                ;
+; Auto RAM Block Balancing                                                   ; On                 ; On                 ;
+; Auto RAM to Logic Cell Conversion                                          ; Off                ; Off                ;
+; Auto Resource Sharing                                                      ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                              ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                        ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                          ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                    ; On                 ; On                 ;
+; Report Parameter Settings                                                  ; On                 ; On                 ;
+; Report Source Assignments                                                  ; On                 ; On                 ;
+; Report Connectivity Checks                                                 ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                         ; Off                ; Off                ;
+; Synchronization Register Chain Length                                      ; 2                  ; 2                  ;
+; PowerPlay Power Optimization                                               ; Normal compilation ; Normal compilation ;
+; HDL message level                                                          ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                            ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                   ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report                         ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                  ; 100                ; 100                ;
+; Clock MUX Protection                                                       ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                                ; Off                ; Off                ;
+; Block Design Naming                                                        ; Auto               ; Auto               ;
+; SDC constraint protection                                                  ; Off                ; Off                ;
+; Synthesis Effort                                                           ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal               ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                                       ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                                         ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                                     ; On                 ; On                 ;
+; Synthesis Seed                                                             ; 1                  ; 1                  ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 8           ;
+; Maximum allowed            ; 4           ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 4           ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processors 2-4         ; < 0.1%      ;
+;     Processors 5-8         ;   0.0%      ;
++----------------------------+-------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                                   ;
++------------------------------------------+-----------------+-------------------------------------------------------+---------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path         ; Used in Netlist ; File Type                                             ; File Name with Absolute Path                                              ; Library ;
++------------------------------------------+-----------------+-------------------------------------------------------+---------------------------------------------------------------------------+---------+
+; spi_interface.v                          ; yes             ; User Verilog HDL File                                 ; D:/Comsol_files/DLIA_report/DLIA/spi_interface.v                          ;         ;
+; multiplier.v                             ; yes             ; User Verilog HDL File                                 ; D:/Comsol_files/DLIA_report/DLIA/multiplier.v                             ;         ;
+; lut_sincos.v                             ; yes             ; User Verilog HDL File                                 ; D:/Comsol_files/DLIA_report/DLIA/lut_sincos.v                             ;         ;
+; integrate_and_dump.v                     ; yes             ; User Verilog HDL File                                 ; D:/Comsol_files/DLIA_report/DLIA/integrate_and_dump.v                     ;         ;
+; frequency_tracker_sync.v                 ; yes             ; User Verilog HDL File                                 ; D:/Comsol_files/DLIA_report/DLIA/frequency_tracker_sync.v                 ;         ;
+; DLIA.v                                   ; yes             ; User Verilog HDL File                                 ; D:/Comsol_files/DLIA_report/DLIA/DLIA.v                                   ;         ;
+; data_delay_block.v                       ; yes             ; User Verilog HDL File                                 ; D:/Comsol_files/DLIA_report/DLIA/data_delay_block.v                       ;         ;
+; cordic_top.v                             ; yes             ; User Verilog HDL File                                 ; D:/Comsol_files/DLIA_report/DLIA/cordic_top.v                             ;         ;
+; cordic_stage.v                           ; yes             ; User Verilog HDL File                                 ; D:/Comsol_files/DLIA_report/DLIA/cordic_stage.v                           ;         ;
+; calibration.v                            ; yes             ; User Verilog HDL File                                 ; D:/Comsol_files/DLIA_report/DLIA/calibration.v                            ;         ;
+; pll/phase_locked_loop.v                  ; yes             ; User Wizard-Generated File                            ; D:/Comsol_files/DLIA_report/DLIA/pll/phase_locked_loop.v                  ;         ;
+; sine_lut.hex                             ; yes             ; Auto-Found Hexadecimal (Intel-Format) File            ; D:/Comsol_files/DLIA_report/DLIA/sine_lut.hex                             ;         ;
+; altpll.tdf                               ; yes             ; Megafunction                                          ; c:/altera/13.0sp1/quartus/libraries/megafunctions/altpll.tdf              ;         ;
+; aglobal130.inc                           ; yes             ; Megafunction                                          ; c:/altera/13.0sp1/quartus/libraries/megafunctions/aglobal130.inc          ;         ;
+; stratix_pll.inc                          ; yes             ; Megafunction                                          ; c:/altera/13.0sp1/quartus/libraries/megafunctions/stratix_pll.inc         ;         ;
+; stratixii_pll.inc                        ; yes             ; Megafunction                                          ; c:/altera/13.0sp1/quartus/libraries/megafunctions/stratixii_pll.inc       ;         ;
+; cycloneii_pll.inc                        ; yes             ; Megafunction                                          ; c:/altera/13.0sp1/quartus/libraries/megafunctions/cycloneii_pll.inc       ;         ;
+; db/phase_locked_loop_altpll.v            ; yes             ; Auto-Generated Megafunction                           ; D:/Comsol_files/DLIA_report/DLIA/db/phase_locked_loop_altpll.v            ;         ;
+; altsyncram.tdf                           ; yes             ; Megafunction                                          ; c:/altera/13.0sp1/quartus/libraries/megafunctions/altsyncram.tdf          ;         ;
+; stratix_ram_block.inc                    ; yes             ; Megafunction                                          ; c:/altera/13.0sp1/quartus/libraries/megafunctions/stratix_ram_block.inc   ;         ;
+; lpm_mux.inc                              ; yes             ; Megafunction                                          ; c:/altera/13.0sp1/quartus/libraries/megafunctions/lpm_mux.inc             ;         ;
+; lpm_decode.inc                           ; yes             ; Megafunction                                          ; c:/altera/13.0sp1/quartus/libraries/megafunctions/lpm_decode.inc          ;         ;
+; a_rdenreg.inc                            ; yes             ; Megafunction                                          ; c:/altera/13.0sp1/quartus/libraries/megafunctions/a_rdenreg.inc           ;         ;
+; altrom.inc                               ; yes             ; Megafunction                                          ; c:/altera/13.0sp1/quartus/libraries/megafunctions/altrom.inc              ;         ;
+; altram.inc                               ; yes             ; Megafunction                                          ; c:/altera/13.0sp1/quartus/libraries/megafunctions/altram.inc              ;         ;
+; altdpram.inc                             ; yes             ; Megafunction                                          ; c:/altera/13.0sp1/quartus/libraries/megafunctions/altdpram.inc            ;         ;
+; db/altsyncram_1sq1.tdf                   ; yes             ; Auto-Generated Megafunction                           ; D:/Comsol_files/DLIA_report/DLIA/db/altsyncram_1sq1.tdf                   ;         ;
+; db/dlia.ram0_lut_sincos_bd5504ff.hdl.mif ; yes             ; Auto-Generated Auto-Found Memory Initialization File  ; D:/Comsol_files/DLIA_report/DLIA/db/dlia.ram0_lut_sincos_bd5504ff.hdl.mif ;         ;
+; lpm_add_sub.tdf                          ; yes             ; Megafunction                                          ; c:/altera/13.0sp1/quartus/libraries/megafunctions/lpm_add_sub.tdf         ;         ;
+; addcore.inc                              ; yes             ; Megafunction                                          ; c:/altera/13.0sp1/quartus/libraries/megafunctions/addcore.inc             ;         ;
+; look_add.inc                             ; yes             ; Megafunction                                          ; c:/altera/13.0sp1/quartus/libraries/megafunctions/look_add.inc            ;         ;
+; bypassff.inc                             ; yes             ; Megafunction                                          ; c:/altera/13.0sp1/quartus/libraries/megafunctions/bypassff.inc            ;         ;
+; altshift.inc                             ; yes             ; Megafunction                                          ; c:/altera/13.0sp1/quartus/libraries/megafunctions/altshift.inc            ;         ;
+; alt_stratix_add_sub.inc                  ; yes             ; Megafunction                                          ; c:/altera/13.0sp1/quartus/libraries/megafunctions/alt_stratix_add_sub.inc ;         ;
+; db/add_sub_ovi.tdf                       ; yes             ; Auto-Generated Megafunction                           ; D:/Comsol_files/DLIA_report/DLIA/db/add_sub_ovi.tdf                       ;         ;
+; lpm_mult.tdf                             ; yes             ; Megafunction                                          ; c:/altera/13.0sp1/quartus/libraries/megafunctions/lpm_mult.tdf            ;         ;
+; lpm_add_sub.inc                          ; yes             ; Megafunction                                          ; c:/altera/13.0sp1/quartus/libraries/megafunctions/lpm_add_sub.inc         ;         ;
+; multcore.inc                             ; yes             ; Megafunction                                          ; c:/altera/13.0sp1/quartus/libraries/megafunctions/multcore.inc            ;         ;
+; db/mult_t5t.tdf                          ; yes             ; Auto-Generated Megafunction                           ; D:/Comsol_files/DLIA_report/DLIA/db/mult_t5t.tdf                          ;         ;
++------------------------------------------+-----------------+-------------------------------------------------------+---------------------------------------------------------------------------+---------+
+
+
++---------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary             ;
++---------------------------------------------+-----------+
+; Resource                                    ; Usage     ;
++---------------------------------------------+-----------+
+; Estimated Total logic elements              ; 4,855     ;
+;                                             ;           ;
+; Total combinational functions               ; 4626      ;
+; Logic element usage by number of LUT inputs ;           ;
+;     -- 4 input functions                    ; 212       ;
+;     -- 3 input functions                    ; 1978      ;
+;     -- <=2 input functions                  ; 2436      ;
+;                                             ;           ;
+; Logic elements by mode                      ;           ;
+;     -- normal mode                          ; 1433      ;
+;     -- arithmetic mode                      ; 3193      ;
+;                                             ;           ;
+; Total registers                             ; 3135      ;
+;     -- Dedicated logic registers            ; 3135      ;
+;     -- I/O registers                        ; 0         ;
+;                                             ;           ;
+; I/O pins                                    ; 116       ;
+; Total memory bits                           ; 12288     ;
+; Embedded Multiplier 9-bit elements          ; 4         ;
+; Total PLLs                                  ; 1         ;
+;     -- PLLs                                 ; 1         ;
+;                                             ;           ;
+; Maximum fan-out node                        ; clk~input ;
+; Maximum fan-out                             ; 3116      ;
+; Total fan-out                               ; 22179     ;
+; Average fan-out                             ; 2.77      ;
++---------------------------------------------+-----------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                          ;
++----------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------------------------+--------------+
+; Compilation Hierarchy Node                         ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                          ; Library Name ;
++----------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------------------------+--------------+
+; |DLIA                                              ; 4626 (0)          ; 3135 (0)     ; 12288       ; 4            ; 0       ; 2         ; 116  ; 0            ; |DLIA                                                                                        ; work         ;
+;    |cordic_top:CORDIC|                             ; 4142 (0)          ; 2732 (0)     ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|cordic_top:CORDIC                                                                      ; work         ;
+;       |cordic_stage:pipeline_gen[0].stage_inst|    ; 125 (125)         ; 67 (67)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|cordic_top:CORDIC|cordic_stage:pipeline_gen[0].stage_inst                              ; work         ;
+;       |cordic_stage:pipeline_gen[10].stage_inst|   ; 137 (137)         ; 96 (96)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|cordic_top:CORDIC|cordic_stage:pipeline_gen[10].stage_inst                             ; work         ;
+;       |cordic_stage:pipeline_gen[11].stage_inst|   ; 136 (136)         ; 96 (96)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|cordic_top:CORDIC|cordic_stage:pipeline_gen[11].stage_inst                             ; work         ;
+;       |cordic_stage:pipeline_gen[12].stage_inst|   ; 165 (165)         ; 96 (96)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|cordic_top:CORDIC|cordic_stage:pipeline_gen[12].stage_inst                             ; work         ;
+;       |cordic_stage:pipeline_gen[13].stage_inst|   ; 161 (161)         ; 96 (96)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|cordic_top:CORDIC|cordic_stage:pipeline_gen[13].stage_inst                             ; work         ;
+;       |cordic_stage:pipeline_gen[14].stage_inst|   ; 129 (129)         ; 96 (96)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|cordic_top:CORDIC|cordic_stage:pipeline_gen[14].stage_inst                             ; work         ;
+;       |cordic_stage:pipeline_gen[15].stage_inst|   ; 128 (128)         ; 96 (96)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|cordic_top:CORDIC|cordic_stage:pipeline_gen[15].stage_inst                             ; work         ;
+;       |cordic_stage:pipeline_gen[16].stage_inst|   ; 153 (153)         ; 96 (96)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|cordic_top:CORDIC|cordic_stage:pipeline_gen[16].stage_inst                             ; work         ;
+;       |cordic_stage:pipeline_gen[17].stage_inst|   ; 121 (121)         ; 96 (96)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|cordic_top:CORDIC|cordic_stage:pipeline_gen[17].stage_inst                             ; work         ;
+;       |cordic_stage:pipeline_gen[18].stage_inst|   ; 120 (120)         ; 96 (96)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|cordic_top:CORDIC|cordic_stage:pipeline_gen[18].stage_inst                             ; work         ;
+;       |cordic_stage:pipeline_gen[19].stage_inst|   ; 119 (119)         ; 96 (96)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|cordic_top:CORDIC|cordic_stage:pipeline_gen[19].stage_inst                             ; work         ;
+;       |cordic_stage:pipeline_gen[1].stage_inst|    ; 130 (130)         ; 71 (71)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|cordic_top:CORDIC|cordic_stage:pipeline_gen[1].stage_inst                              ; work         ;
+;       |cordic_stage:pipeline_gen[20].stage_inst|   ; 119 (119)         ; 96 (96)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|cordic_top:CORDIC|cordic_stage:pipeline_gen[20].stage_inst                             ; work         ;
+;       |cordic_stage:pipeline_gen[21].stage_inst|   ; 146 (146)         ; 96 (96)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|cordic_top:CORDIC|cordic_stage:pipeline_gen[21].stage_inst                             ; work         ;
+;       |cordic_stage:pipeline_gen[22].stage_inst|   ; 143 (143)         ; 96 (96)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|cordic_top:CORDIC|cordic_stage:pipeline_gen[22].stage_inst                             ; work         ;
+;       |cordic_stage:pipeline_gen[23].stage_inst|   ; 141 (141)         ; 96 (96)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|cordic_top:CORDIC|cordic_stage:pipeline_gen[23].stage_inst                             ; work         ;
+;       |cordic_stage:pipeline_gen[24].stage_inst|   ; 109 (109)         ; 96 (96)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|cordic_top:CORDIC|cordic_stage:pipeline_gen[24].stage_inst                             ; work         ;
+;       |cordic_stage:pipeline_gen[25].stage_inst|   ; 108 (108)         ; 96 (96)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|cordic_top:CORDIC|cordic_stage:pipeline_gen[25].stage_inst                             ; work         ;
+;       |cordic_stage:pipeline_gen[26].stage_inst|   ; 137 (137)         ; 96 (96)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|cordic_top:CORDIC|cordic_stage:pipeline_gen[26].stage_inst                             ; work         ;
+;       |cordic_stage:pipeline_gen[27].stage_inst|   ; 134 (134)         ; 67 (67)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|cordic_top:CORDIC|cordic_stage:pipeline_gen[27].stage_inst                             ; work         ;
+;       |cordic_stage:pipeline_gen[28].stage_inst|   ; 66 (66)           ; 63 (63)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|cordic_top:CORDIC|cordic_stage:pipeline_gen[28].stage_inst                             ; work         ;
+;       |cordic_stage:pipeline_gen[2].stage_inst|    ; 153 (153)         ; 96 (96)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|cordic_top:CORDIC|cordic_stage:pipeline_gen[2].stage_inst                              ; work         ;
+;       |cordic_stage:pipeline_gen[3].stage_inst|    ; 183 (183)         ; 96 (96)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|cordic_top:CORDIC|cordic_stage:pipeline_gen[3].stage_inst                              ; work         ;
+;       |cordic_stage:pipeline_gen[4].stage_inst|    ; 177 (177)         ; 96 (96)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|cordic_top:CORDIC|cordic_stage:pipeline_gen[4].stage_inst                              ; work         ;
+;       |cordic_stage:pipeline_gen[5].stage_inst|    ; 148 (148)         ; 96 (96)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|cordic_top:CORDIC|cordic_stage:pipeline_gen[5].stage_inst                              ; work         ;
+;       |cordic_stage:pipeline_gen[6].stage_inst|    ; 177 (177)         ; 96 (96)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|cordic_top:CORDIC|cordic_stage:pipeline_gen[6].stage_inst                              ; work         ;
+;       |cordic_stage:pipeline_gen[7].stage_inst|    ; 174 (174)         ; 96 (96)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|cordic_top:CORDIC|cordic_stage:pipeline_gen[7].stage_inst                              ; work         ;
+;       |cordic_stage:pipeline_gen[8].stage_inst|    ; 142 (142)         ; 96 (96)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|cordic_top:CORDIC|cordic_stage:pipeline_gen[8].stage_inst                              ; work         ;
+;       |cordic_stage:pipeline_gen[9].stage_inst|    ; 138 (138)         ; 96 (96)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|cordic_top:CORDIC|cordic_stage:pipeline_gen[9].stage_inst                              ; work         ;
+;       |cordic_stage:stage1|                        ; 123 (64)          ; 64 (64)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|cordic_top:CORDIC|cordic_stage:stage1                                                  ; work         ;
+;          |lpm_add_sub:Add0|                        ; 59 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|cordic_top:CORDIC|cordic_stage:stage1|lpm_add_sub:Add0                                 ; work         ;
+;             |add_sub_ovi:auto_generated|           ; 59 (59)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|cordic_top:CORDIC|cordic_stage:stage1|lpm_add_sub:Add0|add_sub_ovi:auto_generated      ; work         ;
+;    |data_delay_block:delay|                        ; 0 (0)             ; 13 (13)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|data_delay_block:delay                                                                 ; work         ;
+;    |frequency_tracker_sync:comb_3|                 ; 302 (302)         ; 56 (56)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|frequency_tracker_sync:comb_3                                                          ; work         ;
+;    |integrate_and_dump:cosine_filter|              ; 40 (40)           ; 71 (71)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|integrate_and_dump:cosine_filter                                                       ; work         ;
+;    |integrate_and_dump:sine_filter|                ; 73 (73)           ; 134 (134)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|integrate_and_dump:sine_filter                                                         ; work         ;
+;    |lut_sincos:dds|                                ; 34 (34)           ; 32 (32)      ; 12288       ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|lut_sincos:dds                                                                         ; work         ;
+;       |altsyncram:sine_lut_rtl_0|                  ; 0 (0)             ; 0 (0)        ; 12288       ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|lut_sincos:dds|altsyncram:sine_lut_rtl_0                                               ; work         ;
+;          |altsyncram_1sq1:auto_generated|          ; 0 (0)             ; 0 (0)        ; 12288       ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|lut_sincos:dds|altsyncram:sine_lut_rtl_0|altsyncram_1sq1:auto_generated                ; work         ;
+;    |multiplier:cosine_mix|                         ; 0 (0)             ; 25 (25)      ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |DLIA|multiplier:cosine_mix                                                                  ; work         ;
+;       |lpm_mult:Mult0|                             ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |DLIA|multiplier:cosine_mix|lpm_mult:Mult0                                                   ; work         ;
+;          |mult_t5t:auto_generated|                 ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |DLIA|multiplier:cosine_mix|lpm_mult:Mult0|mult_t5t:auto_generated                           ; work         ;
+;    |multiplier:sine_mix|                           ; 0 (0)             ; 24 (24)      ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |DLIA|multiplier:sine_mix                                                                    ; work         ;
+;       |lpm_mult:Mult0|                             ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |DLIA|multiplier:sine_mix|lpm_mult:Mult0                                                     ; work         ;
+;          |mult_t5t:auto_generated|                 ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |DLIA|multiplier:sine_mix|lpm_mult:Mult0|mult_t5t:auto_generated                             ; work         ;
+;    |phase_locked_loop:p_ll|                        ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|phase_locked_loop:p_ll                                                                 ; work         ;
+;       |altpll:altpll_component|                    ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|phase_locked_loop:p_ll|altpll:altpll_component                                         ; work         ;
+;          |phase_locked_loop_altpll:auto_generated| ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|phase_locked_loop:p_ll|altpll:altpll_component|phase_locked_loop_altpll:auto_generated ; work         ;
+;    |spi_interface:afe|                             ; 35 (35)           ; 48 (48)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |DLIA|spi_interface:afe                                                                      ; work         ;
++----------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis RAM Summary                                                                                                                                                                                          ;
++------------------------------------------------------------------------------------+------+----------------+--------------+--------------+--------------+--------------+-------+------------------------------------------+
+; Name                                                                               ; Type ; Mode           ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size  ; MIF                                      ;
++------------------------------------------------------------------------------------+------+----------------+--------------+--------------+--------------+--------------+-------+------------------------------------------+
+; lut_sincos:dds|altsyncram:sine_lut_rtl_0|altsyncram_1sq1:auto_generated|ALTSYNCRAM ; M9K  ; True Dual Port ; 1024         ; 12           ; 1024         ; 12           ; 12288 ; db/DLIA.ram0_lut_sincos_bd5504ff.hdl.mif ;
++------------------------------------------------------------------------------------+------+----------------+--------------+--------------+--------------+--------------+-------+------------------------------------------+
+
+
++-----------------------------------------------------+
+; Analysis & Synthesis DSP Block Usage Summary        ;
++---------------------------------------+-------------+
+; Statistic                             ; Number Used ;
++---------------------------------------+-------------+
+; Simple Multipliers (9-bit)            ; 0           ;
+; Simple Multipliers (18-bit)           ; 2           ;
+; Embedded Multiplier Blocks            ; --          ;
+; Embedded Multiplier 9-bit elements    ; 4           ;
+; Signed Embedded Multipliers           ; 2           ;
+; Unsigned Embedded Multipliers         ; 0           ;
+; Mixed Sign Embedded Multipliers       ; 0           ;
+; Variable Sign Embedded Multipliers    ; 0           ;
+; Dedicated Input Shift Register Chains ; 0           ;
++---------------------------------------+-------------+
+Note: number of Embedded Multiplier Blocks used is only available after a successful fit.
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis IP Cores Summary                                                                                                                   ;
++--------+--------------+---------+--------------+--------------+------------------------------+----------------------------------------------------------+
+; Vendor ; IP Core Name ; Version ; Release Date ; License Type ; Entity Instance              ; IP Include File                                          ;
++--------+--------------+---------+--------------+--------------+------------------------------+----------------------------------------------------------+
+; Altera ; ALTPLL       ; 13.0    ; N/A          ; N/A          ; |DLIA|phase_locked_loop:p_ll ; D:/Comsol_files/DLIA_report/DLIA/pll/phase_locked_loop.v ;
++--------+--------------+---------+--------------+--------------+------------------------------+----------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                                                                                          ;
++-------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------+
+; Register name                                                                             ; Reason for Removal                                                              ;
++-------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------+
+; cordic_top:CORDIC|cordic_stage:stage1|z_out[0..28]                                        ; Stuck at GND due to stuck port data_in                                          ;
+; cordic_top:CORDIC|cordic_stage:pipeline_gen[0].stage_inst|z_out[0]                        ; Stuck at VCC due to stuck port data_in                                          ;
+; cordic_top:CORDIC|cordic_stage:stage1|z_out[29]                                           ; Stuck at VCC due to stuck port data_in                                          ;
+; cordic_top:CORDIC|cordic_stage:pipeline_gen[0].stage_inst|z_out[2..29]                    ; Merged with cordic_top:CORDIC|cordic_stage:pipeline_gen[0].stage_inst|z_out[1]  ;
+; cordic_top:CORDIC|cordic_stage:stage1|z_out[31]                                           ; Merged with cordic_top:CORDIC|cordic_stage:stage1|z_out[30]                     ;
+; integrate_and_dump:sine_filter|valid_out                                                  ; Merged with integrate_and_dump:cosine_filter|valid_out                          ;
+; multiplier:sine_mix|valid_out                                                             ; Merged with multiplier:cosine_mix|valid_out                                     ;
+; frequency_tracker_sync:comb_3|phase_step[21..30]                                          ; Merged with frequency_tracker_sync:comb_3|phase_step[31]                        ;
+; cordic_top:CORDIC|cordic_stage:pipeline_gen[0].stage_inst|z_out[31]                       ; Merged with cordic_top:CORDIC|cordic_stage:pipeline_gen[0].stage_inst|z_out[30] ;
+; cordic_top:CORDIC|cordic_stage:stage1|y_out[31]                                           ; Merged with cordic_top:CORDIC|cordic_stage:stage1|y_out[30]                     ;
+; cordic_top:CORDIC|cordic_stage:stage1|x_out[31]                                           ; Merged with cordic_top:CORDIC|cordic_stage:stage1|x_out[30]                     ;
+; cordic_top:CORDIC|cordic_stage:pipeline_gen[1].stage_inst|z_out[0]                        ; Stuck at GND due to stuck port data_in                                          ;
+; cordic_top:CORDIC|cordic_stage:pipeline_gen[2].stage_inst|z_out[0]                        ; Stuck at GND due to stuck port data_in                                          ;
+; cordic_top:CORDIC|cordic_stage:pipeline_gen[3].stage_inst|z_out[0]                        ; Stuck at VCC due to stuck port data_in                                          ;
+; cordic_top:CORDIC|cordic_stage:pipeline_gen[4].stage_inst|z_out[0]                        ; Stuck at GND due to stuck port data_in                                          ;
+; cordic_top:CORDIC|cordic_stage:pipeline_gen[5].stage_inst|z_out[0]                        ; Stuck at GND due to stuck port data_in                                          ;
+; cordic_top:CORDIC|cordic_stage:pipeline_gen[6].stage_inst|z_out[0]                        ; Stuck at VCC due to stuck port data_in                                          ;
+; cordic_top:CORDIC|cordic_stage:pipeline_gen[7].stage_inst|z_out[0]                        ; Stuck at GND due to stuck port data_in                                          ;
+; cordic_top:CORDIC|cordic_stage:pipeline_gen[8].stage_inst|z_out[0]                        ; Stuck at GND due to stuck port data_in                                          ;
+; cordic_top:CORDIC|cordic_stage:pipeline_gen[9].stage_inst|z_out[0]                        ; Stuck at GND due to stuck port data_in                                          ;
+; cordic_top:CORDIC|cordic_stage:pipeline_gen[10].stage_inst|z_out[0]                       ; Stuck at GND due to stuck port data_in                                          ;
+; cordic_top:CORDIC|cordic_stage:pipeline_gen[11].stage_inst|z_out[0]                       ; Stuck at GND due to stuck port data_in                                          ;
+; cordic_top:CORDIC|cordic_stage:pipeline_gen[12].stage_inst|z_out[0]                       ; Stuck at VCC due to stuck port data_in                                          ;
+; cordic_top:CORDIC|cordic_stage:pipeline_gen[13].stage_inst|z_out[0]                       ; Stuck at GND due to stuck port data_in                                          ;
+; cordic_top:CORDIC|cordic_stage:pipeline_gen[14].stage_inst|z_out[0]                       ; Stuck at GND due to stuck port data_in                                          ;
+; cordic_top:CORDIC|cordic_stage:pipeline_gen[15].stage_inst|z_out[0]                       ; Stuck at GND due to stuck port data_in                                          ;
+; cordic_top:CORDIC|cordic_stage:pipeline_gen[16].stage_inst|z_out[0]                       ; Stuck at VCC due to stuck port data_in                                          ;
+; cordic_top:CORDIC|cordic_stage:pipeline_gen[17].stage_inst|z_out[0]                       ; Stuck at VCC due to stuck port data_in                                          ;
+; cordic_top:CORDIC|cordic_stage:pipeline_gen[18].stage_inst|z_out[0]                       ; Stuck at VCC due to stuck port data_in                                          ;
+; cordic_top:CORDIC|cordic_stage:pipeline_gen[19].stage_inst|z_out[0]                       ; Stuck at VCC due to stuck port data_in                                          ;
+; cordic_top:CORDIC|cordic_stage:pipeline_gen[20].stage_inst|z_out[0]                       ; Stuck at VCC due to stuck port data_in                                          ;
+; cordic_top:CORDIC|cordic_stage:pipeline_gen[21].stage_inst|z_out[0]                       ; Stuck at GND due to stuck port data_in                                          ;
+; cordic_top:CORDIC|cordic_stage:pipeline_gen[22].stage_inst|z_out[0]                       ; Stuck at VCC due to stuck port data_in                                          ;
+; cordic_top:CORDIC|cordic_stage:pipeline_gen[23].stage_inst|z_out[0]                       ; Stuck at GND due to stuck port data_in                                          ;
+; cordic_top:CORDIC|cordic_stage:pipeline_gen[24].stage_inst|z_out[0]                       ; Stuck at GND due to stuck port data_in                                          ;
+; cordic_top:CORDIC|cordic_stage:pipeline_gen[25].stage_inst|z_out[0]                       ; Stuck at GND due to stuck port data_in                                          ;
+; cordic_top:CORDIC|cordic_stage:pipeline_gen[26].stage_inst|z_out[0]                       ; Stuck at VCC due to stuck port data_in                                          ;
+; cordic_top:CORDIC|cordic_stage:pipeline_gen[27].stage_inst|z_out[0]                       ; Stuck at GND due to stuck port data_in                                          ;
+; cordic_top:CORDIC|cordic_stage:pipeline_gen[28].stage_inst|z_out[0]                       ; Stuck at VCC due to stuck port data_in                                          ;
+; cordic_top:CORDIC|cordic_stage:pipeline_gen[1].stage_inst|z_out[5,7,8,12..18,20,21,26,28] ; Merged with cordic_top:CORDIC|cordic_stage:pipeline_gen[1].stage_inst|z_out[4]  ;
+; cordic_top:CORDIC|cordic_stage:pipeline_gen[1].stage_inst|z_out[9..11,19,22..25,27,29]    ; Merged with cordic_top:CORDIC|cordic_stage:pipeline_gen[1].stage_inst|z_out[6]  ;
+; cordic_top:CORDIC|cordic_stage:pipeline_gen[1].stage_inst|z_out[31]                       ; Merged with cordic_top:CORDIC|cordic_stage:pipeline_gen[1].stage_inst|z_out[30] ;
+; frequency_tracker_sync:comb_3|phase_step[31]                                              ; Stuck at GND due to stuck port data_in                                          ;
+; integrate_and_dump:cosine_filter|accumlator[40..47]                                       ; Lost fanout                                                                     ;
+; integrate_and_dump:sine_filter|accumlator[40..47]                                         ; Lost fanout                                                                     ;
+; Total Number of Removed Registers = 145                                                   ;                                                                                 ;
++-------------------------------------------------------------------------------------------+---------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                                                                                           ;
++--------------------------------------------------------------------+---------------------------+----------------------------------------------------------------------+
+; Register name                                                      ; Reason for Removal        ; Registers Removed due to This Register                               ;
++--------------------------------------------------------------------+---------------------------+----------------------------------------------------------------------+
+; cordic_top:CORDIC|cordic_stage:pipeline_gen[1].stage_inst|z_out[0] ; Stuck at GND              ; cordic_top:CORDIC|cordic_stage:pipeline_gen[2].stage_inst|z_out[0],  ;
+;                                                                    ; due to stuck port data_in ; cordic_top:CORDIC|cordic_stage:pipeline_gen[3].stage_inst|z_out[0],  ;
+;                                                                    ;                           ; cordic_top:CORDIC|cordic_stage:pipeline_gen[4].stage_inst|z_out[0],  ;
+;                                                                    ;                           ; cordic_top:CORDIC|cordic_stage:pipeline_gen[5].stage_inst|z_out[0],  ;
+;                                                                    ;                           ; cordic_top:CORDIC|cordic_stage:pipeline_gen[6].stage_inst|z_out[0],  ;
+;                                                                    ;                           ; cordic_top:CORDIC|cordic_stage:pipeline_gen[7].stage_inst|z_out[0],  ;
+;                                                                    ;                           ; cordic_top:CORDIC|cordic_stage:pipeline_gen[8].stage_inst|z_out[0],  ;
+;                                                                    ;                           ; cordic_top:CORDIC|cordic_stage:pipeline_gen[9].stage_inst|z_out[0],  ;
+;                                                                    ;                           ; cordic_top:CORDIC|cordic_stage:pipeline_gen[10].stage_inst|z_out[0], ;
+;                                                                    ;                           ; cordic_top:CORDIC|cordic_stage:pipeline_gen[11].stage_inst|z_out[0], ;
+;                                                                    ;                           ; cordic_top:CORDIC|cordic_stage:pipeline_gen[12].stage_inst|z_out[0], ;
+;                                                                    ;                           ; cordic_top:CORDIC|cordic_stage:pipeline_gen[13].stage_inst|z_out[0], ;
+;                                                                    ;                           ; cordic_top:CORDIC|cordic_stage:pipeline_gen[14].stage_inst|z_out[0], ;
+;                                                                    ;                           ; cordic_top:CORDIC|cordic_stage:pipeline_gen[15].stage_inst|z_out[0], ;
+;                                                                    ;                           ; cordic_top:CORDIC|cordic_stage:pipeline_gen[16].stage_inst|z_out[0], ;
+;                                                                    ;                           ; cordic_top:CORDIC|cordic_stage:pipeline_gen[17].stage_inst|z_out[0], ;
+;                                                                    ;                           ; cordic_top:CORDIC|cordic_stage:pipeline_gen[18].stage_inst|z_out[0], ;
+;                                                                    ;                           ; cordic_top:CORDIC|cordic_stage:pipeline_gen[19].stage_inst|z_out[0], ;
+;                                                                    ;                           ; cordic_top:CORDIC|cordic_stage:pipeline_gen[20].stage_inst|z_out[0], ;
+;                                                                    ;                           ; cordic_top:CORDIC|cordic_stage:pipeline_gen[21].stage_inst|z_out[0], ;
+;                                                                    ;                           ; cordic_top:CORDIC|cordic_stage:pipeline_gen[22].stage_inst|z_out[0], ;
+;                                                                    ;                           ; cordic_top:CORDIC|cordic_stage:pipeline_gen[23].stage_inst|z_out[0], ;
+;                                                                    ;                           ; cordic_top:CORDIC|cordic_stage:pipeline_gen[24].stage_inst|z_out[0], ;
+;                                                                    ;                           ; cordic_top:CORDIC|cordic_stage:pipeline_gen[25].stage_inst|z_out[0], ;
+;                                                                    ;                           ; cordic_top:CORDIC|cordic_stage:pipeline_gen[26].stage_inst|z_out[0], ;
+;                                                                    ;                           ; cordic_top:CORDIC|cordic_stage:pipeline_gen[27].stage_inst|z_out[0], ;
+;                                                                    ;                           ; cordic_top:CORDIC|cordic_stage:pipeline_gen[28].stage_inst|z_out[0]  ;
++--------------------------------------------------------------------+---------------------------+----------------------------------------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 3135  ;
+; Number of registers using Synchronous Clear  ; 176   ;
+; Number of registers using Synchronous Load   ; 372   ;
+; Number of registers using Asynchronous Clear ; 0     ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 2968  ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++--------------------------------------------------+
+; Inverted Register Statistics                     ;
++----------------------------------------+---------+
+; Inverted Register                      ; Fan out ;
++----------------------------------------+---------+
+; spi_interface:afe|idle_state           ; 6       ;
+; Total number of inverted registers = 1 ;         ;
++----------------------------------------+---------+
+
+
++--------------------------------------------------------------------------+
+; Registers Packed Into Inferred Megafunctions                             ;
++-----------------------------------+-------------------------------+------+
+; Register Name                     ; Megafunction                  ; Type ;
++-----------------------------------+-------------------------------+------+
+; lut_sincos:dds|sine_wave[0..11]   ; lut_sincos:dds|sine_lut_rtl_0 ; RAM  ;
+; lut_sincos:dds|cosine_wave[0..11] ; lut_sincos:dds|sine_lut_rtl_0 ; RAM  ;
++-----------------------------------+-------------------------------+------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                    ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                          ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------+
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |DLIA|spi_interface:afe|count[3]                    ;
+; 3:1                ; 96 bits   ; 192 LEs       ; 96 LEs               ; 96 LEs                 ; Yes        ; |DLIA|integrate_and_dump:sine_filter|accumlator[14] ;
+; 16:1               ; 22 bits   ; 220 LEs       ; 220 LEs              ; 0 LEs                  ; Yes        ; |DLIA|frequency_tracker_sync:comb_3|phase_step[17]  ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------+
+; Source assignments for lut_sincos:dds|altsyncram:sine_lut_rtl_0|altsyncram_1sq1:auto_generated ;
++---------------------------------+--------------------+------+----------------------------------+
+; Assignment                      ; Value              ; From ; To                               ;
++---------------------------------+--------------------+------+----------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                ;
++---------------------------------+--------------------+------+----------------------------------+
+
+
++---------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: phase_locked_loop:p_ll|altpll:altpll_component ;
++-------------------------------+-------------------------------------+-----------------------+
+; Parameter Name                ; Value                               ; Type                  ;
++-------------------------------+-------------------------------------+-----------------------+
+; OPERATION_MODE                ; NORMAL                              ; Untyped               ;
+; PLL_TYPE                      ; AUTO                                ; Untyped               ;
+; LPM_HINT                      ; CBX_MODULE_PREFIX=phase_locked_loop ; Untyped               ;
+; QUALIFY_CONF_DONE             ; OFF                                 ; Untyped               ;
+; COMPENSATE_CLOCK              ; CLK0                                ; Untyped               ;
+; SCAN_CHAIN                    ; LONG                                ; Untyped               ;
+; PRIMARY_CLOCK                 ; INCLK0                              ; Untyped               ;
+; INCLK0_INPUT_FREQUENCY        ; 20000                               ; Signed Integer        ;
+; INCLK1_INPUT_FREQUENCY        ; 0                                   ; Untyped               ;
+; GATE_LOCK_SIGNAL              ; NO                                  ; Untyped               ;
+; GATE_LOCK_COUNTER             ; 0                                   ; Untyped               ;
+; LOCK_HIGH                     ; 1                                   ; Untyped               ;
+; LOCK_LOW                      ; 1                                   ; Untyped               ;
+; VALID_LOCK_MULTIPLIER         ; 1                                   ; Untyped               ;
+; INVALID_LOCK_MULTIPLIER       ; 5                                   ; Untyped               ;
+; SWITCH_OVER_ON_LOSSCLK        ; OFF                                 ; Untyped               ;
+; SWITCH_OVER_ON_GATED_LOCK     ; OFF                                 ; Untyped               ;
+; ENABLE_SWITCH_OVER_COUNTER    ; OFF                                 ; Untyped               ;
+; SKIP_VCO                      ; OFF                                 ; Untyped               ;
+; SWITCH_OVER_COUNTER           ; 0                                   ; Untyped               ;
+; SWITCH_OVER_TYPE              ; AUTO                                ; Untyped               ;
+; FEEDBACK_SOURCE               ; EXTCLK0                             ; Untyped               ;
+; BANDWIDTH                     ; 0                                   ; Untyped               ;
+; BANDWIDTH_TYPE                ; AUTO                                ; Untyped               ;
+; SPREAD_FREQUENCY              ; 0                                   ; Untyped               ;
+; DOWN_SPREAD                   ; 0                                   ; Untyped               ;
+; SELF_RESET_ON_GATED_LOSS_LOCK ; OFF                                 ; Untyped               ;
+; SELF_RESET_ON_LOSS_LOCK       ; OFF                                 ; Untyped               ;
+; CLK9_MULTIPLY_BY              ; 0                                   ; Untyped               ;
+; CLK8_MULTIPLY_BY              ; 0                                   ; Untyped               ;
+; CLK7_MULTIPLY_BY              ; 0                                   ; Untyped               ;
+; CLK6_MULTIPLY_BY              ; 0                                   ; Untyped               ;
+; CLK5_MULTIPLY_BY              ; 1                                   ; Untyped               ;
+; CLK4_MULTIPLY_BY              ; 1                                   ; Untyped               ;
+; CLK3_MULTIPLY_BY              ; 1                                   ; Untyped               ;
+; CLK2_MULTIPLY_BY              ; 1                                   ; Untyped               ;
+; CLK1_MULTIPLY_BY              ; 1                                   ; Untyped               ;
+; CLK0_MULTIPLY_BY              ; 8                                   ; Signed Integer        ;
+; CLK9_DIVIDE_BY                ; 0                                   ; Untyped               ;
+; CLK8_DIVIDE_BY                ; 0                                   ; Untyped               ;
+; CLK7_DIVIDE_BY                ; 0                                   ; Untyped               ;
+; CLK6_DIVIDE_BY                ; 0                                   ; Untyped               ;
+; CLK5_DIVIDE_BY                ; 1                                   ; Untyped               ;
+; CLK4_DIVIDE_BY                ; 1                                   ; Untyped               ;
+; CLK3_DIVIDE_BY                ; 1                                   ; Untyped               ;
+; CLK2_DIVIDE_BY                ; 1                                   ; Untyped               ;
+; CLK1_DIVIDE_BY                ; 1                                   ; Untyped               ;
+; CLK0_DIVIDE_BY                ; 125                                 ; Signed Integer        ;
+; CLK9_PHASE_SHIFT              ; 0                                   ; Untyped               ;
+; CLK8_PHASE_SHIFT              ; 0                                   ; Untyped               ;
+; CLK7_PHASE_SHIFT              ; 0                                   ; Untyped               ;
+; CLK6_PHASE_SHIFT              ; 0                                   ; Untyped               ;
+; CLK5_PHASE_SHIFT              ; 0                                   ; Untyped               ;
+; CLK4_PHASE_SHIFT              ; 0                                   ; Untyped               ;
+; CLK3_PHASE_SHIFT              ; 0                                   ; Untyped               ;
+; CLK2_PHASE_SHIFT              ; 0                                   ; Untyped               ;
+; CLK1_PHASE_SHIFT              ; 0                                   ; Untyped               ;
+; CLK0_PHASE_SHIFT              ; 0                                   ; Untyped               ;
+; CLK5_TIME_DELAY               ; 0                                   ; Untyped               ;
+; CLK4_TIME_DELAY               ; 0                                   ; Untyped               ;
+; CLK3_TIME_DELAY               ; 0                                   ; Untyped               ;
+; CLK2_TIME_DELAY               ; 0                                   ; Untyped               ;
+; CLK1_TIME_DELAY               ; 0                                   ; Untyped               ;
+; CLK0_TIME_DELAY               ; 0                                   ; Untyped               ;
+; CLK9_DUTY_CYCLE               ; 50                                  ; Untyped               ;
+; CLK8_DUTY_CYCLE               ; 50                                  ; Untyped               ;
+; CLK7_DUTY_CYCLE               ; 50                                  ; Untyped               ;
+; CLK6_DUTY_CYCLE               ; 50                                  ; Untyped               ;
+; CLK5_DUTY_CYCLE               ; 50                                  ; Untyped               ;
+; CLK4_DUTY_CYCLE               ; 50                                  ; Untyped               ;
+; CLK3_DUTY_CYCLE               ; 50                                  ; Untyped               ;
+; CLK2_DUTY_CYCLE               ; 50                                  ; Untyped               ;
+; CLK1_DUTY_CYCLE               ; 50                                  ; Untyped               ;
+; CLK0_DUTY_CYCLE               ; 50                                  ; Signed Integer        ;
+; CLK9_USE_EVEN_COUNTER_MODE    ; OFF                                 ; Untyped               ;
+; CLK8_USE_EVEN_COUNTER_MODE    ; OFF                                 ; Untyped               ;
+; CLK7_USE_EVEN_COUNTER_MODE    ; OFF                                 ; Untyped               ;
+; CLK6_USE_EVEN_COUNTER_MODE    ; OFF                                 ; Untyped               ;
+; CLK5_USE_EVEN_COUNTER_MODE    ; OFF                                 ; Untyped               ;
+; CLK4_USE_EVEN_COUNTER_MODE    ; OFF                                 ; Untyped               ;
+; CLK3_USE_EVEN_COUNTER_MODE    ; OFF                                 ; Untyped               ;
+; CLK2_USE_EVEN_COUNTER_MODE    ; OFF                                 ; Untyped               ;
+; CLK1_USE_EVEN_COUNTER_MODE    ; OFF                                 ; Untyped               ;
+; CLK0_USE_EVEN_COUNTER_MODE    ; OFF                                 ; Untyped               ;
+; CLK9_USE_EVEN_COUNTER_VALUE   ; OFF                                 ; Untyped               ;
+; CLK8_USE_EVEN_COUNTER_VALUE   ; OFF                                 ; Untyped               ;
+; CLK7_USE_EVEN_COUNTER_VALUE   ; OFF                                 ; Untyped               ;
+; CLK6_USE_EVEN_COUNTER_VALUE   ; OFF                                 ; Untyped               ;
+; CLK5_USE_EVEN_COUNTER_VALUE   ; OFF                                 ; Untyped               ;
+; CLK4_USE_EVEN_COUNTER_VALUE   ; OFF                                 ; Untyped               ;
+; CLK3_USE_EVEN_COUNTER_VALUE   ; OFF                                 ; Untyped               ;
+; CLK2_USE_EVEN_COUNTER_VALUE   ; OFF                                 ; Untyped               ;
+; CLK1_USE_EVEN_COUNTER_VALUE   ; OFF                                 ; Untyped               ;
+; CLK0_USE_EVEN_COUNTER_VALUE   ; OFF                                 ; Untyped               ;
+; LOCK_WINDOW_UI                ;  0.05                               ; Untyped               ;
+; LOCK_WINDOW_UI_BITS           ; UNUSED                              ; Untyped               ;
+; VCO_RANGE_DETECTOR_LOW_BITS   ; UNUSED                              ; Untyped               ;
+; VCO_RANGE_DETECTOR_HIGH_BITS  ; UNUSED                              ; Untyped               ;
+; DPA_MULTIPLY_BY               ; 0                                   ; Untyped               ;
+; DPA_DIVIDE_BY                 ; 1                                   ; Untyped               ;
+; DPA_DIVIDER                   ; 0                                   ; Untyped               ;
+; EXTCLK3_MULTIPLY_BY           ; 1                                   ; Untyped               ;
+; EXTCLK2_MULTIPLY_BY           ; 1                                   ; Untyped               ;
+; EXTCLK1_MULTIPLY_BY           ; 1                                   ; Untyped               ;
+; EXTCLK0_MULTIPLY_BY           ; 1                                   ; Untyped               ;
+; EXTCLK3_DIVIDE_BY             ; 1                                   ; Untyped               ;
+; EXTCLK2_DIVIDE_BY             ; 1                                   ; Untyped               ;
+; EXTCLK1_DIVIDE_BY             ; 1                                   ; Untyped               ;
+; EXTCLK0_DIVIDE_BY             ; 1                                   ; Untyped               ;
+; EXTCLK3_PHASE_SHIFT           ; 0                                   ; Untyped               ;
+; EXTCLK2_PHASE_SHIFT           ; 0                                   ; Untyped               ;
+; EXTCLK1_PHASE_SHIFT           ; 0                                   ; Untyped               ;
+; EXTCLK0_PHASE_SHIFT           ; 0                                   ; Untyped               ;
+; EXTCLK3_TIME_DELAY            ; 0                                   ; Untyped               ;
+; EXTCLK2_TIME_DELAY            ; 0                                   ; Untyped               ;
+; EXTCLK1_TIME_DELAY            ; 0                                   ; Untyped               ;
+; EXTCLK0_TIME_DELAY            ; 0                                   ; Untyped               ;
+; EXTCLK3_DUTY_CYCLE            ; 50                                  ; Untyped               ;
+; EXTCLK2_DUTY_CYCLE            ; 50                                  ; Untyped               ;
+; EXTCLK1_DUTY_CYCLE            ; 50                                  ; Untyped               ;
+; EXTCLK0_DUTY_CYCLE            ; 50                                  ; Untyped               ;
+; VCO_MULTIPLY_BY               ; 0                                   ; Untyped               ;
+; VCO_DIVIDE_BY                 ; 0                                   ; Untyped               ;
+; SCLKOUT0_PHASE_SHIFT          ; 0                                   ; Untyped               ;
+; SCLKOUT1_PHASE_SHIFT          ; 0                                   ; Untyped               ;
+; VCO_MIN                       ; 0                                   ; Untyped               ;
+; VCO_MAX                       ; 0                                   ; Untyped               ;
+; VCO_CENTER                    ; 0                                   ; Untyped               ;
+; PFD_MIN                       ; 0                                   ; Untyped               ;
+; PFD_MAX                       ; 0                                   ; Untyped               ;
+; M_INITIAL                     ; 0                                   ; Untyped               ;
+; M                             ; 0                                   ; Untyped               ;
+; N                             ; 1                                   ; Untyped               ;
+; M2                            ; 1                                   ; Untyped               ;
+; N2                            ; 1                                   ; Untyped               ;
+; SS                            ; 1                                   ; Untyped               ;
+; C0_HIGH                       ; 0                                   ; Untyped               ;
+; C1_HIGH                       ; 0                                   ; Untyped               ;
+; C2_HIGH                       ; 0                                   ; Untyped               ;
+; C3_HIGH                       ; 0                                   ; Untyped               ;
+; C4_HIGH                       ; 0                                   ; Untyped               ;
+; C5_HIGH                       ; 0                                   ; Untyped               ;
+; C6_HIGH                       ; 0                                   ; Untyped               ;
+; C7_HIGH                       ; 0                                   ; Untyped               ;
+; C8_HIGH                       ; 0                                   ; Untyped               ;
+; C9_HIGH                       ; 0                                   ; Untyped               ;
+; C0_LOW                        ; 0                                   ; Untyped               ;
+; C1_LOW                        ; 0                                   ; Untyped               ;
+; C2_LOW                        ; 0                                   ; Untyped               ;
+; C3_LOW                        ; 0                                   ; Untyped               ;
+; C4_LOW                        ; 0                                   ; Untyped               ;
+; C5_LOW                        ; 0                                   ; Untyped               ;
+; C6_LOW                        ; 0                                   ; Untyped               ;
+; C7_LOW                        ; 0                                   ; Untyped               ;
+; C8_LOW                        ; 0                                   ; Untyped               ;
+; C9_LOW                        ; 0                                   ; Untyped               ;
+; C0_INITIAL                    ; 0                                   ; Untyped               ;
+; C1_INITIAL                    ; 0                                   ; Untyped               ;
+; C2_INITIAL                    ; 0                                   ; Untyped               ;
+; C3_INITIAL                    ; 0                                   ; Untyped               ;
+; C4_INITIAL                    ; 0                                   ; Untyped               ;
+; C5_INITIAL                    ; 0                                   ; Untyped               ;
+; C6_INITIAL                    ; 0                                   ; Untyped               ;
+; C7_INITIAL                    ; 0                                   ; Untyped               ;
+; C8_INITIAL                    ; 0                                   ; Untyped               ;
+; C9_INITIAL                    ; 0                                   ; Untyped               ;
+; C0_MODE                       ; BYPASS                              ; Untyped               ;
+; C1_MODE                       ; BYPASS                              ; Untyped               ;
+; C2_MODE                       ; BYPASS                              ; Untyped               ;
+; C3_MODE                       ; BYPASS                              ; Untyped               ;
+; C4_MODE                       ; BYPASS                              ; Untyped               ;
+; C5_MODE                       ; BYPASS                              ; Untyped               ;
+; C6_MODE                       ; BYPASS                              ; Untyped               ;
+; C7_MODE                       ; BYPASS                              ; Untyped               ;
+; C8_MODE                       ; BYPASS                              ; Untyped               ;
+; C9_MODE                       ; BYPASS                              ; Untyped               ;
+; C0_PH                         ; 0                                   ; Untyped               ;
+; C1_PH                         ; 0                                   ; Untyped               ;
+; C2_PH                         ; 0                                   ; Untyped               ;
+; C3_PH                         ; 0                                   ; Untyped               ;
+; C4_PH                         ; 0                                   ; Untyped               ;
+; C5_PH                         ; 0                                   ; Untyped               ;
+; C6_PH                         ; 0                                   ; Untyped               ;
+; C7_PH                         ; 0                                   ; Untyped               ;
+; C8_PH                         ; 0                                   ; Untyped               ;
+; C9_PH                         ; 0                                   ; Untyped               ;
+; L0_HIGH                       ; 1                                   ; Untyped               ;
+; L1_HIGH                       ; 1                                   ; Untyped               ;
+; G0_HIGH                       ; 1                                   ; Untyped               ;
+; G1_HIGH                       ; 1                                   ; Untyped               ;
+; G2_HIGH                       ; 1                                   ; Untyped               ;
+; G3_HIGH                       ; 1                                   ; Untyped               ;
+; E0_HIGH                       ; 1                                   ; Untyped               ;
+; E1_HIGH                       ; 1                                   ; Untyped               ;
+; E2_HIGH                       ; 1                                   ; Untyped               ;
+; E3_HIGH                       ; 1                                   ; Untyped               ;
+; L0_LOW                        ; 1                                   ; Untyped               ;
+; L1_LOW                        ; 1                                   ; Untyped               ;
+; G0_LOW                        ; 1                                   ; Untyped               ;
+; G1_LOW                        ; 1                                   ; Untyped               ;
+; G2_LOW                        ; 1                                   ; Untyped               ;
+; G3_LOW                        ; 1                                   ; Untyped               ;
+; E0_LOW                        ; 1                                   ; Untyped               ;
+; E1_LOW                        ; 1                                   ; Untyped               ;
+; E2_LOW                        ; 1                                   ; Untyped               ;
+; E3_LOW                        ; 1                                   ; Untyped               ;
+; L0_INITIAL                    ; 1                                   ; Untyped               ;
+; L1_INITIAL                    ; 1                                   ; Untyped               ;
+; G0_INITIAL                    ; 1                                   ; Untyped               ;
+; G1_INITIAL                    ; 1                                   ; Untyped               ;
+; G2_INITIAL                    ; 1                                   ; Untyped               ;
+; G3_INITIAL                    ; 1                                   ; Untyped               ;
+; E0_INITIAL                    ; 1                                   ; Untyped               ;
+; E1_INITIAL                    ; 1                                   ; Untyped               ;
+; E2_INITIAL                    ; 1                                   ; Untyped               ;
+; E3_INITIAL                    ; 1                                   ; Untyped               ;
+; L0_MODE                       ; BYPASS                              ; Untyped               ;
+; L1_MODE                       ; BYPASS                              ; Untyped               ;
+; G0_MODE                       ; BYPASS                              ; Untyped               ;
+; G1_MODE                       ; BYPASS                              ; Untyped               ;
+; G2_MODE                       ; BYPASS                              ; Untyped               ;
+; G3_MODE                       ; BYPASS                              ; Untyped               ;
+; E0_MODE                       ; BYPASS                              ; Untyped               ;
+; E1_MODE                       ; BYPASS                              ; Untyped               ;
+; E2_MODE                       ; BYPASS                              ; Untyped               ;
+; E3_MODE                       ; BYPASS                              ; Untyped               ;
+; L0_PH                         ; 0                                   ; Untyped               ;
+; L1_PH                         ; 0                                   ; Untyped               ;
+; G0_PH                         ; 0                                   ; Untyped               ;
+; G1_PH                         ; 0                                   ; Untyped               ;
+; G2_PH                         ; 0                                   ; Untyped               ;
+; G3_PH                         ; 0                                   ; Untyped               ;
+; E0_PH                         ; 0                                   ; Untyped               ;
+; E1_PH                         ; 0                                   ; Untyped               ;
+; E2_PH                         ; 0                                   ; Untyped               ;
+; E3_PH                         ; 0                                   ; Untyped               ;
+; M_PH                          ; 0                                   ; Untyped               ;
+; C1_USE_CASC_IN                ; OFF                                 ; Untyped               ;
+; C2_USE_CASC_IN                ; OFF                                 ; Untyped               ;
+; C3_USE_CASC_IN                ; OFF                                 ; Untyped               ;
+; C4_USE_CASC_IN                ; OFF                                 ; Untyped               ;
+; C5_USE_CASC_IN                ; OFF                                 ; Untyped               ;
+; C6_USE_CASC_IN                ; OFF                                 ; Untyped               ;
+; C7_USE_CASC_IN                ; OFF                                 ; Untyped               ;
+; C8_USE_CASC_IN                ; OFF                                 ; Untyped               ;
+; C9_USE_CASC_IN                ; OFF                                 ; Untyped               ;
+; CLK0_COUNTER                  ; G0                                  ; Untyped               ;
+; CLK1_COUNTER                  ; G0                                  ; Untyped               ;
+; CLK2_COUNTER                  ; G0                                  ; Untyped               ;
+; CLK3_COUNTER                  ; G0                                  ; Untyped               ;
+; CLK4_COUNTER                  ; G0                                  ; Untyped               ;
+; CLK5_COUNTER                  ; G0                                  ; Untyped               ;
+; CLK6_COUNTER                  ; E0                                  ; Untyped               ;
+; CLK7_COUNTER                  ; E1                                  ; Untyped               ;
+; CLK8_COUNTER                  ; E2                                  ; Untyped               ;
+; CLK9_COUNTER                  ; E3                                  ; Untyped               ;
+; L0_TIME_DELAY                 ; 0                                   ; Untyped               ;
+; L1_TIME_DELAY                 ; 0                                   ; Untyped               ;
+; G0_TIME_DELAY                 ; 0                                   ; Untyped               ;
+; G1_TIME_DELAY                 ; 0                                   ; Untyped               ;
+; G2_TIME_DELAY                 ; 0                                   ; Untyped               ;
+; G3_TIME_DELAY                 ; 0                                   ; Untyped               ;
+; E0_TIME_DELAY                 ; 0                                   ; Untyped               ;
+; E1_TIME_DELAY                 ; 0                                   ; Untyped               ;
+; E2_TIME_DELAY                 ; 0                                   ; Untyped               ;
+; E3_TIME_DELAY                 ; 0                                   ; Untyped               ;
+; M_TIME_DELAY                  ; 0                                   ; Untyped               ;
+; N_TIME_DELAY                  ; 0                                   ; Untyped               ;
+; EXTCLK3_COUNTER               ; E3                                  ; Untyped               ;
+; EXTCLK2_COUNTER               ; E2                                  ; Untyped               ;
+; EXTCLK1_COUNTER               ; E1                                  ; Untyped               ;
+; EXTCLK0_COUNTER               ; E0                                  ; Untyped               ;
+; ENABLE0_COUNTER               ; L0                                  ; Untyped               ;
+; ENABLE1_COUNTER               ; L0                                  ; Untyped               ;
+; CHARGE_PUMP_CURRENT           ; 2                                   ; Untyped               ;
+; LOOP_FILTER_R                 ;  1.000000                           ; Untyped               ;
+; LOOP_FILTER_C                 ; 5                                   ; Untyped               ;
+; CHARGE_PUMP_CURRENT_BITS      ; 9999                                ; Untyped               ;
+; LOOP_FILTER_R_BITS            ; 9999                                ; Untyped               ;
+; LOOP_FILTER_C_BITS            ; 9999                                ; Untyped               ;
+; VCO_POST_SCALE                ; 0                                   ; Untyped               ;
+; CLK2_OUTPUT_FREQUENCY         ; 0                                   ; Untyped               ;
+; CLK1_OUTPUT_FREQUENCY         ; 0                                   ; Untyped               ;
+; CLK0_OUTPUT_FREQUENCY         ; 0                                   ; Untyped               ;
+; INTENDED_DEVICE_FAMILY        ; Cyclone IV E                        ; Untyped               ;
+; PORT_CLKENA0                  ; PORT_UNUSED                         ; Untyped               ;
+; PORT_CLKENA1                  ; PORT_UNUSED                         ; Untyped               ;
+; PORT_CLKENA2                  ; PORT_UNUSED                         ; Untyped               ;
+; PORT_CLKENA3                  ; PORT_UNUSED                         ; Untyped               ;
+; PORT_CLKENA4                  ; PORT_UNUSED                         ; Untyped               ;
+; PORT_CLKENA5                  ; PORT_UNUSED                         ; Untyped               ;
+; PORT_EXTCLKENA0               ; PORT_CONNECTIVITY                   ; Untyped               ;
+; PORT_EXTCLKENA1               ; PORT_CONNECTIVITY                   ; Untyped               ;
+; PORT_EXTCLKENA2               ; PORT_CONNECTIVITY                   ; Untyped               ;
+; PORT_EXTCLKENA3               ; PORT_CONNECTIVITY                   ; Untyped               ;
+; PORT_EXTCLK0                  ; PORT_UNUSED                         ; Untyped               ;
+; PORT_EXTCLK1                  ; PORT_UNUSED                         ; Untyped               ;
+; PORT_EXTCLK2                  ; PORT_UNUSED                         ; Untyped               ;
+; PORT_EXTCLK3                  ; PORT_UNUSED                         ; Untyped               ;
+; PORT_CLKBAD0                  ; PORT_UNUSED                         ; Untyped               ;
+; PORT_CLKBAD1                  ; PORT_UNUSED                         ; Untyped               ;
+; PORT_CLK0                     ; PORT_USED                           ; Untyped               ;
+; PORT_CLK1                     ; PORT_UNUSED                         ; Untyped               ;
+; PORT_CLK2                     ; PORT_UNUSED                         ; Untyped               ;
+; PORT_CLK3                     ; PORT_UNUSED                         ; Untyped               ;
+; PORT_CLK4                     ; PORT_UNUSED                         ; Untyped               ;
+; PORT_CLK5                     ; PORT_UNUSED                         ; Untyped               ;
+; PORT_CLK6                     ; PORT_UNUSED                         ; Untyped               ;
+; PORT_CLK7                     ; PORT_UNUSED                         ; Untyped               ;
+; PORT_CLK8                     ; PORT_UNUSED                         ; Untyped               ;
+; PORT_CLK9                     ; PORT_UNUSED                         ; Untyped               ;
+; PORT_SCANDATA                 ; PORT_UNUSED                         ; Untyped               ;
+; PORT_SCANDATAOUT              ; PORT_UNUSED                         ; Untyped               ;
+; PORT_SCANDONE                 ; PORT_UNUSED                         ; Untyped               ;
+; PORT_SCLKOUT1                 ; PORT_CONNECTIVITY                   ; Untyped               ;
+; PORT_SCLKOUT0                 ; PORT_CONNECTIVITY                   ; Untyped               ;
+; PORT_ACTIVECLOCK              ; PORT_UNUSED                         ; Untyped               ;
+; PORT_CLKLOSS                  ; PORT_UNUSED                         ; Untyped               ;
+; PORT_INCLK1                   ; PORT_UNUSED                         ; Untyped               ;
+; PORT_INCLK0                   ; PORT_USED                           ; Untyped               ;
+; PORT_FBIN                     ; PORT_UNUSED                         ; Untyped               ;
+; PORT_PLLENA                   ; PORT_UNUSED                         ; Untyped               ;
+; PORT_CLKSWITCH                ; PORT_UNUSED                         ; Untyped               ;
+; PORT_ARESET                   ; PORT_UNUSED                         ; Untyped               ;
+; PORT_PFDENA                   ; PORT_UNUSED                         ; Untyped               ;
+; PORT_SCANCLK                  ; PORT_UNUSED                         ; Untyped               ;
+; PORT_SCANACLR                 ; PORT_UNUSED                         ; Untyped               ;
+; PORT_SCANREAD                 ; PORT_UNUSED                         ; Untyped               ;
+; PORT_SCANWRITE                ; PORT_UNUSED                         ; Untyped               ;
+; PORT_ENABLE0                  ; PORT_CONNECTIVITY                   ; Untyped               ;
+; PORT_ENABLE1                  ; PORT_CONNECTIVITY                   ; Untyped               ;
+; PORT_LOCKED                   ; PORT_UNUSED                         ; Untyped               ;
+; PORT_CONFIGUPDATE             ; PORT_UNUSED                         ; Untyped               ;
+; PORT_FBOUT                    ; PORT_CONNECTIVITY                   ; Untyped               ;
+; PORT_PHASEDONE                ; PORT_UNUSED                         ; Untyped               ;
+; PORT_PHASESTEP                ; PORT_UNUSED                         ; Untyped               ;
+; PORT_PHASEUPDOWN              ; PORT_UNUSED                         ; Untyped               ;
+; PORT_SCANCLKENA               ; PORT_UNUSED                         ; Untyped               ;
+; PORT_PHASECOUNTERSELECT       ; PORT_UNUSED                         ; Untyped               ;
+; PORT_VCOOVERRANGE             ; PORT_CONNECTIVITY                   ; Untyped               ;
+; PORT_VCOUNDERRANGE            ; PORT_CONNECTIVITY                   ; Untyped               ;
+; M_TEST_SOURCE                 ; 5                                   ; Untyped               ;
+; C0_TEST_SOURCE                ; 5                                   ; Untyped               ;
+; C1_TEST_SOURCE                ; 5                                   ; Untyped               ;
+; C2_TEST_SOURCE                ; 5                                   ; Untyped               ;
+; C3_TEST_SOURCE                ; 5                                   ; Untyped               ;
+; C4_TEST_SOURCE                ; 5                                   ; Untyped               ;
+; C5_TEST_SOURCE                ; 5                                   ; Untyped               ;
+; C6_TEST_SOURCE                ; 5                                   ; Untyped               ;
+; C7_TEST_SOURCE                ; 5                                   ; Untyped               ;
+; C8_TEST_SOURCE                ; 5                                   ; Untyped               ;
+; C9_TEST_SOURCE                ; 5                                   ; Untyped               ;
+; CBXI_PARAMETER                ; phase_locked_loop_altpll            ; Untyped               ;
+; VCO_FREQUENCY_CONTROL         ; AUTO                                ; Untyped               ;
+; VCO_PHASE_SHIFT_STEP          ; 0                                   ; Untyped               ;
+; WIDTH_CLOCK                   ; 5                                   ; Signed Integer        ;
+; WIDTH_PHASECOUNTERSELECT      ; 4                                   ; Untyped               ;
+; USING_FBMIMICBIDIR_PORT       ; OFF                                 ; Untyped               ;
+; DEVICE_FAMILY                 ; Cyclone IV E                        ; Untyped               ;
+; SCAN_CHAIN_MIF_FILE           ; UNUSED                              ; Untyped               ;
+; SIM_GATE_LOCK_DEVICE_BEHAVIOR ; OFF                                 ; Untyped               ;
+; AUTO_CARRY_CHAINS             ; ON                                  ; AUTO_CARRY            ;
+; IGNORE_CARRY_BUFFERS          ; OFF                                 ; IGNORE_CARRY          ;
+; AUTO_CASCADE_CHAINS           ; ON                                  ; AUTO_CASCADE          ;
+; IGNORE_CASCADE_BUFFERS        ; OFF                                 ; IGNORE_CASCADE        ;
++-------------------------------+-------------------------------------+-----------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: data_delay_block:delay ;
++----------------+-------+--------------------------------------------+
+; Parameter Name ; Value ; Type                                       ;
++----------------+-------+--------------------------------------------+
+; DATA_WIDTH     ; 12    ; Signed Integer                             ;
++----------------+-------+--------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: lut_sincos:dds ;
++----------------+-------+------------------------------------+
+; Parameter Name ; Value ; Type                               ;
++----------------+-------+------------------------------------+
+; PHASE_WIDTH    ; 32    ; Signed Integer                     ;
+; ADDR_WIDTH     ; 10    ; Signed Integer                     ;
+; DATA_WIDTH     ; 12    ; Signed Integer                     ;
++----------------+-------+------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: multiplier:sine_mix ;
++----------------+-------+-----------------------------------------+
+; Parameter Name ; Value ; Type                                    ;
++----------------+-------+-----------------------------------------+
+; DATA_WIDTH     ; 12    ; Signed Integer                          ;
++----------------+-------+-----------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: multiplier:cosine_mix ;
++----------------+-------+-------------------------------------------+
+; Parameter Name ; Value ; Type                                      ;
++----------------+-------+-------------------------------------------+
+; DATA_WIDTH     ; 12    ; Signed Integer                            ;
++----------------+-------+-------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic_top:CORDIC ;
++----------------+-------+---------------------------------------+
+; Parameter Name ; Value ; Type                                  ;
++----------------+-------+---------------------------------------+
+; IN_WIDTH       ; 30    ; Signed Integer                        ;
+; OUT_WIDTH      ; 32    ; Signed Integer                        ;
++----------------+-------+---------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:stage1 ;
++----------------+-------+-----------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                      ;
++----------------+-------+-----------------------------------------------------------+
+; IN_WIDTH       ; 30    ; Signed Integer                                            ;
+; OUT_WIDTH      ; 32    ; Signed Integer                                            ;
+; i              ; 0     ; Signed Integer                                            ;
++----------------+-------+-----------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[0].stage_inst ;
++----------------+-------+-------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                          ;
++----------------+-------+-------------------------------------------------------------------------------+
+; IN_WIDTH       ; 32    ; Signed Integer                                                                ;
+; OUT_WIDTH      ; 32    ; Signed Integer                                                                ;
+; i              ; 1     ; Signed Integer                                                                ;
++----------------+-------+-------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[1].stage_inst ;
++----------------+-------+-------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                          ;
++----------------+-------+-------------------------------------------------------------------------------+
+; IN_WIDTH       ; 32    ; Signed Integer                                                                ;
+; OUT_WIDTH      ; 32    ; Signed Integer                                                                ;
+; i              ; 2     ; Signed Integer                                                                ;
++----------------+-------+-------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[2].stage_inst ;
++----------------+-------+-------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                          ;
++----------------+-------+-------------------------------------------------------------------------------+
+; IN_WIDTH       ; 32    ; Signed Integer                                                                ;
+; OUT_WIDTH      ; 32    ; Signed Integer                                                                ;
+; i              ; 3     ; Signed Integer                                                                ;
++----------------+-------+-------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[3].stage_inst ;
++----------------+-------+-------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                          ;
++----------------+-------+-------------------------------------------------------------------------------+
+; IN_WIDTH       ; 32    ; Signed Integer                                                                ;
+; OUT_WIDTH      ; 32    ; Signed Integer                                                                ;
+; i              ; 4     ; Signed Integer                                                                ;
++----------------+-------+-------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[4].stage_inst ;
++----------------+-------+-------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                          ;
++----------------+-------+-------------------------------------------------------------------------------+
+; IN_WIDTH       ; 32    ; Signed Integer                                                                ;
+; OUT_WIDTH      ; 32    ; Signed Integer                                                                ;
+; i              ; 5     ; Signed Integer                                                                ;
++----------------+-------+-------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[5].stage_inst ;
++----------------+-------+-------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                          ;
++----------------+-------+-------------------------------------------------------------------------------+
+; IN_WIDTH       ; 32    ; Signed Integer                                                                ;
+; OUT_WIDTH      ; 32    ; Signed Integer                                                                ;
+; i              ; 6     ; Signed Integer                                                                ;
++----------------+-------+-------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[6].stage_inst ;
++----------------+-------+-------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                          ;
++----------------+-------+-------------------------------------------------------------------------------+
+; IN_WIDTH       ; 32    ; Signed Integer                                                                ;
+; OUT_WIDTH      ; 32    ; Signed Integer                                                                ;
+; i              ; 7     ; Signed Integer                                                                ;
++----------------+-------+-------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[7].stage_inst ;
++----------------+-------+-------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                          ;
++----------------+-------+-------------------------------------------------------------------------------+
+; IN_WIDTH       ; 32    ; Signed Integer                                                                ;
+; OUT_WIDTH      ; 32    ; Signed Integer                                                                ;
+; i              ; 8     ; Signed Integer                                                                ;
++----------------+-------+-------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[8].stage_inst ;
++----------------+-------+-------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                          ;
++----------------+-------+-------------------------------------------------------------------------------+
+; IN_WIDTH       ; 32    ; Signed Integer                                                                ;
+; OUT_WIDTH      ; 32    ; Signed Integer                                                                ;
+; i              ; 9     ; Signed Integer                                                                ;
++----------------+-------+-------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[9].stage_inst ;
++----------------+-------+-------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                          ;
++----------------+-------+-------------------------------------------------------------------------------+
+; IN_WIDTH       ; 32    ; Signed Integer                                                                ;
+; OUT_WIDTH      ; 32    ; Signed Integer                                                                ;
+; i              ; 10    ; Signed Integer                                                                ;
++----------------+-------+-------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[10].stage_inst ;
++----------------+-------+--------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                           ;
++----------------+-------+--------------------------------------------------------------------------------+
+; IN_WIDTH       ; 32    ; Signed Integer                                                                 ;
+; OUT_WIDTH      ; 32    ; Signed Integer                                                                 ;
+; i              ; 11    ; Signed Integer                                                                 ;
++----------------+-------+--------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[11].stage_inst ;
++----------------+-------+--------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                           ;
++----------------+-------+--------------------------------------------------------------------------------+
+; IN_WIDTH       ; 32    ; Signed Integer                                                                 ;
+; OUT_WIDTH      ; 32    ; Signed Integer                                                                 ;
+; i              ; 12    ; Signed Integer                                                                 ;
++----------------+-------+--------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[12].stage_inst ;
++----------------+-------+--------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                           ;
++----------------+-------+--------------------------------------------------------------------------------+
+; IN_WIDTH       ; 32    ; Signed Integer                                                                 ;
+; OUT_WIDTH      ; 32    ; Signed Integer                                                                 ;
+; i              ; 13    ; Signed Integer                                                                 ;
++----------------+-------+--------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[13].stage_inst ;
++----------------+-------+--------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                           ;
++----------------+-------+--------------------------------------------------------------------------------+
+; IN_WIDTH       ; 32    ; Signed Integer                                                                 ;
+; OUT_WIDTH      ; 32    ; Signed Integer                                                                 ;
+; i              ; 14    ; Signed Integer                                                                 ;
++----------------+-------+--------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[14].stage_inst ;
++----------------+-------+--------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                           ;
++----------------+-------+--------------------------------------------------------------------------------+
+; IN_WIDTH       ; 32    ; Signed Integer                                                                 ;
+; OUT_WIDTH      ; 32    ; Signed Integer                                                                 ;
+; i              ; 15    ; Signed Integer                                                                 ;
++----------------+-------+--------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[15].stage_inst ;
++----------------+-------+--------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                           ;
++----------------+-------+--------------------------------------------------------------------------------+
+; IN_WIDTH       ; 32    ; Signed Integer                                                                 ;
+; OUT_WIDTH      ; 32    ; Signed Integer                                                                 ;
+; i              ; 16    ; Signed Integer                                                                 ;
++----------------+-------+--------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[16].stage_inst ;
++----------------+-------+--------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                           ;
++----------------+-------+--------------------------------------------------------------------------------+
+; IN_WIDTH       ; 32    ; Signed Integer                                                                 ;
+; OUT_WIDTH      ; 32    ; Signed Integer                                                                 ;
+; i              ; 17    ; Signed Integer                                                                 ;
++----------------+-------+--------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[17].stage_inst ;
++----------------+-------+--------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                           ;
++----------------+-------+--------------------------------------------------------------------------------+
+; IN_WIDTH       ; 32    ; Signed Integer                                                                 ;
+; OUT_WIDTH      ; 32    ; Signed Integer                                                                 ;
+; i              ; 18    ; Signed Integer                                                                 ;
++----------------+-------+--------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[18].stage_inst ;
++----------------+-------+--------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                           ;
++----------------+-------+--------------------------------------------------------------------------------+
+; IN_WIDTH       ; 32    ; Signed Integer                                                                 ;
+; OUT_WIDTH      ; 32    ; Signed Integer                                                                 ;
+; i              ; 19    ; Signed Integer                                                                 ;
++----------------+-------+--------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[19].stage_inst ;
++----------------+-------+--------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                           ;
++----------------+-------+--------------------------------------------------------------------------------+
+; IN_WIDTH       ; 32    ; Signed Integer                                                                 ;
+; OUT_WIDTH      ; 32    ; Signed Integer                                                                 ;
+; i              ; 20    ; Signed Integer                                                                 ;
++----------------+-------+--------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[20].stage_inst ;
++----------------+-------+--------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                           ;
++----------------+-------+--------------------------------------------------------------------------------+
+; IN_WIDTH       ; 32    ; Signed Integer                                                                 ;
+; OUT_WIDTH      ; 32    ; Signed Integer                                                                 ;
+; i              ; 21    ; Signed Integer                                                                 ;
++----------------+-------+--------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[21].stage_inst ;
++----------------+-------+--------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                           ;
++----------------+-------+--------------------------------------------------------------------------------+
+; IN_WIDTH       ; 32    ; Signed Integer                                                                 ;
+; OUT_WIDTH      ; 32    ; Signed Integer                                                                 ;
+; i              ; 22    ; Signed Integer                                                                 ;
++----------------+-------+--------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[22].stage_inst ;
++----------------+-------+--------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                           ;
++----------------+-------+--------------------------------------------------------------------------------+
+; IN_WIDTH       ; 32    ; Signed Integer                                                                 ;
+; OUT_WIDTH      ; 32    ; Signed Integer                                                                 ;
+; i              ; 23    ; Signed Integer                                                                 ;
++----------------+-------+--------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[23].stage_inst ;
++----------------+-------+--------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                           ;
++----------------+-------+--------------------------------------------------------------------------------+
+; IN_WIDTH       ; 32    ; Signed Integer                                                                 ;
+; OUT_WIDTH      ; 32    ; Signed Integer                                                                 ;
+; i              ; 24    ; Signed Integer                                                                 ;
++----------------+-------+--------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[24].stage_inst ;
++----------------+-------+--------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                           ;
++----------------+-------+--------------------------------------------------------------------------------+
+; IN_WIDTH       ; 32    ; Signed Integer                                                                 ;
+; OUT_WIDTH      ; 32    ; Signed Integer                                                                 ;
+; i              ; 25    ; Signed Integer                                                                 ;
++----------------+-------+--------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[25].stage_inst ;
++----------------+-------+--------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                           ;
++----------------+-------+--------------------------------------------------------------------------------+
+; IN_WIDTH       ; 32    ; Signed Integer                                                                 ;
+; OUT_WIDTH      ; 32    ; Signed Integer                                                                 ;
+; i              ; 26    ; Signed Integer                                                                 ;
++----------------+-------+--------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[26].stage_inst ;
++----------------+-------+--------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                           ;
++----------------+-------+--------------------------------------------------------------------------------+
+; IN_WIDTH       ; 32    ; Signed Integer                                                                 ;
+; OUT_WIDTH      ; 32    ; Signed Integer                                                                 ;
+; i              ; 27    ; Signed Integer                                                                 ;
++----------------+-------+--------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[27].stage_inst ;
++----------------+-------+--------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                           ;
++----------------+-------+--------------------------------------------------------------------------------+
+; IN_WIDTH       ; 32    ; Signed Integer                                                                 ;
+; OUT_WIDTH      ; 32    ; Signed Integer                                                                 ;
+; i              ; 28    ; Signed Integer                                                                 ;
++----------------+-------+--------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: cordic_top:CORDIC|cordic_stage:pipeline_gen[28].stage_inst ;
++----------------+-------+--------------------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                                           ;
++----------------+-------+--------------------------------------------------------------------------------+
+; IN_WIDTH       ; 32    ; Signed Integer                                                                 ;
+; OUT_WIDTH      ; 32    ; Signed Integer                                                                 ;
+; i              ; 29    ; Signed Integer                                                                 ;
++----------------+-------+--------------------------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: lut_sincos:dds|altsyncram:sine_lut_rtl_0      ;
++------------------------------------+------------------------------------------+----------------+
+; Parameter Name                     ; Value                                    ; Type           ;
++------------------------------------+------------------------------------------+----------------+
+; BYTE_SIZE_BLOCK                    ; 8                                        ; Untyped        ;
+; AUTO_CARRY_CHAINS                  ; ON                                       ; AUTO_CARRY     ;
+; IGNORE_CARRY_BUFFERS               ; OFF                                      ; IGNORE_CARRY   ;
+; AUTO_CASCADE_CHAINS                ; ON                                       ; AUTO_CASCADE   ;
+; IGNORE_CASCADE_BUFFERS             ; OFF                                      ; IGNORE_CASCADE ;
+; WIDTH_BYTEENA                      ; 1                                        ; Untyped        ;
+; OPERATION_MODE                     ; BIDIR_DUAL_PORT                          ; Untyped        ;
+; WIDTH_A                            ; 12                                       ; Untyped        ;
+; WIDTHAD_A                          ; 10                                       ; Untyped        ;
+; NUMWORDS_A                         ; 1024                                     ; Untyped        ;
+; OUTDATA_REG_A                      ; UNREGISTERED                             ; Untyped        ;
+; ADDRESS_ACLR_A                     ; NONE                                     ; Untyped        ;
+; OUTDATA_ACLR_A                     ; NONE                                     ; Untyped        ;
+; WRCONTROL_ACLR_A                   ; NONE                                     ; Untyped        ;
+; INDATA_ACLR_A                      ; NONE                                     ; Untyped        ;
+; BYTEENA_ACLR_A                     ; NONE                                     ; Untyped        ;
+; WIDTH_B                            ; 12                                       ; Untyped        ;
+; WIDTHAD_B                          ; 10                                       ; Untyped        ;
+; NUMWORDS_B                         ; 1024                                     ; Untyped        ;
+; INDATA_REG_B                       ; CLOCK0                                   ; Untyped        ;
+; WRCONTROL_WRADDRESS_REG_B          ; CLOCK0                                   ; Untyped        ;
+; RDCONTROL_REG_B                    ; CLOCK1                                   ; Untyped        ;
+; ADDRESS_REG_B                      ; CLOCK0                                   ; Untyped        ;
+; OUTDATA_REG_B                      ; UNREGISTERED                             ; Untyped        ;
+; BYTEENA_REG_B                      ; CLOCK1                                   ; Untyped        ;
+; INDATA_ACLR_B                      ; NONE                                     ; Untyped        ;
+; WRCONTROL_ACLR_B                   ; NONE                                     ; Untyped        ;
+; ADDRESS_ACLR_B                     ; NONE                                     ; Untyped        ;
+; OUTDATA_ACLR_B                     ; NONE                                     ; Untyped        ;
+; RDCONTROL_ACLR_B                   ; NONE                                     ; Untyped        ;
+; BYTEENA_ACLR_B                     ; NONE                                     ; Untyped        ;
+; WIDTH_BYTEENA_A                    ; 1                                        ; Untyped        ;
+; WIDTH_BYTEENA_B                    ; 1                                        ; Untyped        ;
+; RAM_BLOCK_TYPE                     ; M9K                                      ; Untyped        ;
+; BYTE_SIZE                          ; 8                                        ; Untyped        ;
+; READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                                ; Untyped        ;
+; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ                     ; Untyped        ;
+; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ                     ; Untyped        ;
+; INIT_FILE                          ; db/DLIA.ram0_lut_sincos_bd5504ff.hdl.mif ; Untyped        ;
+; INIT_FILE_LAYOUT                   ; PORT_A                                   ; Untyped        ;
+; MAXIMUM_DEPTH                      ; 0                                        ; Untyped        ;
+; CLOCK_ENABLE_INPUT_A               ; NORMAL                                   ; Untyped        ;
+; CLOCK_ENABLE_INPUT_B               ; NORMAL                                   ; Untyped        ;
+; CLOCK_ENABLE_OUTPUT_A              ; NORMAL                                   ; Untyped        ;
+; CLOCK_ENABLE_OUTPUT_B              ; NORMAL                                   ; Untyped        ;
+; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN                          ; Untyped        ;
+; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN                          ; Untyped        ;
+; ENABLE_ECC                         ; FALSE                                    ; Untyped        ;
+; ECC_PIPELINE_STAGE_ENABLED         ; FALSE                                    ; Untyped        ;
+; WIDTH_ECCSTATUS                    ; 3                                        ; Untyped        ;
+; DEVICE_FAMILY                      ; Cyclone IV E                             ; Untyped        ;
+; CBXI_PARAMETER                     ; altsyncram_1sq1                          ; Untyped        ;
++------------------------------------+------------------------------------------+----------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: cordic_top:CORDIC|cordic_stage:stage1|lpm_add_sub:Add0 ;
++------------------------+--------------+-----------------------------------------------------------------+
+; Parameter Name         ; Value        ; Type                                                            ;
++------------------------+--------------+-----------------------------------------------------------------+
+; LPM_WIDTH              ; 31           ; Untyped                                                         ;
+; LPM_REPRESENTATION     ; UNSIGNED     ; Untyped                                                         ;
+; LPM_DIRECTION          ; DEFAULT      ; Untyped                                                         ;
+; ONE_INPUT_IS_CONSTANT  ; NO           ; Untyped                                                         ;
+; LPM_PIPELINE           ; 0            ; Untyped                                                         ;
+; MAXIMIZE_SPEED         ; 5            ; Untyped                                                         ;
+; REGISTERED_AT_END      ; 0            ; Untyped                                                         ;
+; OPTIMIZE_FOR_SPEED     ; 5            ; Untyped                                                         ;
+; USE_CS_BUFFERS         ; 1            ; Untyped                                                         ;
+; CARRY_CHAIN            ; MANUAL       ; Untyped                                                         ;
+; CARRY_CHAIN_LENGTH     ; 48           ; CARRY_CHAIN_LENGTH                                              ;
+; DEVICE_FAMILY          ; Cyclone IV E ; Untyped                                                         ;
+; USE_WYS                ; OFF          ; Untyped                                                         ;
+; STYLE                  ; FAST         ; Untyped                                                         ;
+; CBXI_PARAMETER         ; add_sub_ovi  ; Untyped                                                         ;
+; AUTO_CARRY_CHAINS      ; ON           ; AUTO_CARRY                                                      ;
+; IGNORE_CARRY_BUFFERS   ; OFF          ; IGNORE_CARRY                                                    ;
+; AUTO_CASCADE_CHAINS    ; ON           ; AUTO_CASCADE                                                    ;
+; IGNORE_CASCADE_BUFFERS ; OFF          ; IGNORE_CASCADE                                                  ;
++------------------------+--------------+-----------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: cordic_top:CORDIC|cordic_stage:stage1|lpm_add_sub:Add0 ;
++------------------------+--------------+-----------------------------------------------------------------+
+; Parameter Name         ; Value        ; Type                                                            ;
++------------------------+--------------+-----------------------------------------------------------------+
+; LPM_WIDTH              ; 31           ; Untyped                                                         ;
+; LPM_REPRESENTATION     ; UNSIGNED     ; Untyped                                                         ;
+; LPM_DIRECTION          ; DEFAULT      ; Untyped                                                         ;
+; ONE_INPUT_IS_CONSTANT  ; NO           ; Untyped                                                         ;
+; LPM_PIPELINE           ; 0            ; Untyped                                                         ;
+; MAXIMIZE_SPEED         ; 5            ; Untyped                                                         ;
+; REGISTERED_AT_END      ; 0            ; Untyped                                                         ;
+; OPTIMIZE_FOR_SPEED     ; 5            ; Untyped                                                         ;
+; USE_CS_BUFFERS         ; 1            ; Untyped                                                         ;
+; CARRY_CHAIN            ; MANUAL       ; Untyped                                                         ;
+; CARRY_CHAIN_LENGTH     ; 48           ; CARRY_CHAIN_LENGTH                                              ;
+; DEVICE_FAMILY          ; Cyclone IV E ; Untyped                                                         ;
+; USE_WYS                ; OFF          ; Untyped                                                         ;
+; STYLE                  ; FAST         ; Untyped                                                         ;
+; CBXI_PARAMETER         ; add_sub_ovi  ; Untyped                                                         ;
+; AUTO_CARRY_CHAINS      ; ON           ; AUTO_CARRY                                                      ;
+; IGNORE_CARRY_BUFFERS   ; OFF          ; IGNORE_CARRY                                                    ;
+; AUTO_CASCADE_CHAINS    ; ON           ; AUTO_CASCADE                                                    ;
+; IGNORE_CASCADE_BUFFERS ; OFF          ; IGNORE_CASCADE                                                  ;
++------------------------+--------------+-----------------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: multiplier:cosine_mix|lpm_mult:Mult0 ;
++------------------------------------------------+--------------+-----------------------+
+; Parameter Name                                 ; Value        ; Type                  ;
++------------------------------------------------+--------------+-----------------------+
+; AUTO_CARRY_CHAINS                              ; ON           ; AUTO_CARRY            ;
+; IGNORE_CARRY_BUFFERS                           ; OFF          ; IGNORE_CARRY          ;
+; AUTO_CASCADE_CHAINS                            ; ON           ; AUTO_CASCADE          ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF          ; IGNORE_CASCADE        ;
+; LPM_WIDTHA                                     ; 12           ; Untyped               ;
+; LPM_WIDTHB                                     ; 12           ; Untyped               ;
+; LPM_WIDTHP                                     ; 24           ; Untyped               ;
+; LPM_WIDTHR                                     ; 24           ; Untyped               ;
+; LPM_WIDTHS                                     ; 1            ; Untyped               ;
+; LPM_REPRESENTATION                             ; SIGNED       ; Untyped               ;
+; LPM_PIPELINE                                   ; 0            ; Untyped               ;
+; LATENCY                                        ; 0            ; Untyped               ;
+; INPUT_A_IS_CONSTANT                            ; NO           ; Untyped               ;
+; INPUT_B_IS_CONSTANT                            ; NO           ; Untyped               ;
+; USE_EAB                                        ; OFF          ; Untyped               ;
+; MAXIMIZE_SPEED                                 ; 6            ; Untyped               ;
+; DEVICE_FAMILY                                  ; Cyclone IV E ; Untyped               ;
+; CARRY_CHAIN                                    ; MANUAL       ; Untyped               ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT          ; TECH_MAPPER_APEX20K   ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO         ; Untyped               ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0            ; Untyped               ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0            ; Untyped               ;
+; CBXI_PARAMETER                                 ; mult_t5t     ; Untyped               ;
+; INPUT_A_FIXED_VALUE                            ; Bx           ; Untyped               ;
+; INPUT_B_FIXED_VALUE                            ; Bx           ; Untyped               ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF          ; Untyped               ;
++------------------------------------------------+--------------+-----------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: multiplier:sine_mix|lpm_mult:Mult0 ;
++------------------------------------------------+--------------+---------------------+
+; Parameter Name                                 ; Value        ; Type                ;
++------------------------------------------------+--------------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON           ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF          ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON           ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF          ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 12           ; Untyped             ;
+; LPM_WIDTHB                                     ; 12           ; Untyped             ;
+; LPM_WIDTHP                                     ; 24           ; Untyped             ;
+; LPM_WIDTHR                                     ; 24           ; Untyped             ;
+; LPM_WIDTHS                                     ; 1            ; Untyped             ;
+; LPM_REPRESENTATION                             ; SIGNED       ; Untyped             ;
+; LPM_PIPELINE                                   ; 0            ; Untyped             ;
+; LATENCY                                        ; 0            ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; NO           ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; NO           ; Untyped             ;
+; USE_EAB                                        ; OFF          ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 6            ; Untyped             ;
+; DEVICE_FAMILY                                  ; Cyclone IV E ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL       ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT          ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO         ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0            ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0            ; Untyped             ;
+; CBXI_PARAMETER                                 ; mult_t5t     ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx           ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF          ; Untyped             ;
++------------------------------------------------+--------------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++--------------------------------------------------------------------------------+
+; altpll Parameter Settings by Entity Instance                                   ;
++-------------------------------+------------------------------------------------+
+; Name                          ; Value                                          ;
++-------------------------------+------------------------------------------------+
+; Number of entity instances    ; 1                                              ;
+; Entity Instance               ; phase_locked_loop:p_ll|altpll:altpll_component ;
+;     -- OPERATION_MODE         ; NORMAL                                         ;
+;     -- PLL_TYPE               ; AUTO                                           ;
+;     -- PRIMARY_CLOCK          ; INCLK0                                         ;
+;     -- INCLK0_INPUT_FREQUENCY ; 20000                                          ;
+;     -- INCLK1_INPUT_FREQUENCY ; 0                                              ;
+;     -- VCO_MULTIPLY_BY        ; 0                                              ;
+;     -- VCO_DIVIDE_BY          ; 0                                              ;
++-------------------------------+------------------------------------------------+
+
+
++--------------------------------------------------------------------------------------+
+; altsyncram Parameter Settings by Entity Instance                                     ;
++-------------------------------------------+------------------------------------------+
+; Name                                      ; Value                                    ;
++-------------------------------------------+------------------------------------------+
+; Number of entity instances                ; 1                                        ;
+; Entity Instance                           ; lut_sincos:dds|altsyncram:sine_lut_rtl_0 ;
+;     -- OPERATION_MODE                     ; BIDIR_DUAL_PORT                          ;
+;     -- WIDTH_A                            ; 12                                       ;
+;     -- NUMWORDS_A                         ; 1024                                     ;
+;     -- OUTDATA_REG_A                      ; UNREGISTERED                             ;
+;     -- WIDTH_B                            ; 12                                       ;
+;     -- NUMWORDS_B                         ; 1024                                     ;
+;     -- ADDRESS_REG_B                      ; CLOCK0                                   ;
+;     -- OUTDATA_REG_B                      ; UNREGISTERED                             ;
+;     -- RAM_BLOCK_TYPE                     ; M9K                                      ;
+;     -- READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                                ;
++-------------------------------------------+------------------------------------------+
+
+
++------------------------------------------------------------------------------+
+; lpm_mult Parameter Settings by Entity Instance                               ;
++---------------------------------------+--------------------------------------+
+; Name                                  ; Value                                ;
++---------------------------------------+--------------------------------------+
+; Number of entity instances            ; 2                                    ;
+; Entity Instance                       ; multiplier:cosine_mix|lpm_mult:Mult0 ;
+;     -- LPM_WIDTHA                     ; 12                                   ;
+;     -- LPM_WIDTHB                     ; 12                                   ;
+;     -- LPM_WIDTHP                     ; 24                                   ;
+;     -- LPM_REPRESENTATION             ; SIGNED                               ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                                   ;
+;     -- INPUT_B_IS_CONSTANT            ; NO                                   ;
+;     -- USE_EAB                        ; OFF                                  ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                                 ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                                   ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                                   ;
+; Entity Instance                       ; multiplier:sine_mix|lpm_mult:Mult0   ;
+;     -- LPM_WIDTHA                     ; 12                                   ;
+;     -- LPM_WIDTHB                     ; 12                                   ;
+;     -- LPM_WIDTHP                     ; 24                                   ;
+;     -- LPM_REPRESENTATION             ; SIGNED                               ;
+;     -- INPUT_A_IS_CONSTANT            ; NO                                   ;
+;     -- INPUT_B_IS_CONSTANT            ; NO                                   ;
+;     -- USE_EAB                        ; OFF                                  ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                                 ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                                   ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                                   ;
++---------------------------------------+--------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "cordic_top:CORDIC"                                                                                            ;
++-----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port      ; Type   ; Severity ; Details                                                                                                  ;
++-----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; z_in      ; Input  ; Info     ; Stuck at GND                                                                                             ;
+; valid_out ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
+; y_out     ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++-----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "integrate_and_dump:cosine_filter"                                                                            ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port     ; Type   ; Severity ; Details                                                                                                  ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; rst_n    ; Input  ; Info     ; Stuck at VCC                                                                                             ;
+; N_sample ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------------+
+; Port Connectivity Checks: "integrate_and_dump:sine_filter" ;
++-------+-------+----------+---------------------------------+
+; Port  ; Type  ; Severity ; Details                         ;
++-------+-------+----------+---------------------------------+
+; rst_n ; Input ; Info     ; Stuck at VCC                    ;
++-------+-------+----------+---------------------------------+
+
+
++---------------------------------------------------+
+; Port Connectivity Checks: "multiplier:cosine_mix" ;
++-------+-------+----------+------------------------+
+; Port  ; Type  ; Severity ; Details                ;
++-------+-------+----------+------------------------+
+; rst_n ; Input ; Info     ; Stuck at VCC           ;
++-------+-------+----------+------------------------+
+
+
++-------------------------------------------------+
+; Port Connectivity Checks: "multiplier:sine_mix" ;
++-------+-------+----------+----------------------+
+; Port  ; Type  ; Severity ; Details              ;
++-------+-------+----------+----------------------+
+; rst_n ; Input ; Info     ; Stuck at VCC         ;
++-------+-------+----------+----------------------+
+
+
++---------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "lut_sincos:dds"                                                                          ;
++-----------+--------+----------+-------------------------------------------------------------------------------------+
+; Port      ; Type   ; Severity ; Details                                                                             ;
++-----------+--------+----------+-------------------------------------------------------------------------------------+
+; rst_n     ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; enable    ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; valid_out ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++-----------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------+
+; Port Connectivity Checks: "data_delay_block:delay" ;
++-------+-------+----------+-------------------------+
+; Port  ; Type  ; Severity ; Details                 ;
++-------+-------+----------+-------------------------+
+; rst_n ; Input ; Info     ; Stuck at VCC            ;
++-------+-------+----------+-------------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "spi_interface:afe"                                                                                        ;
++-------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port  ; Type   ; Severity ; Details                                                                                                  ;
++-------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; rst_n ; Input  ; Info     ; Stuck at VCC                                                                                             ;
+; count ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++-------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "frequency_tracker_sync:comb_3"                                                                                ;
++-----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port      ; Type   ; Severity ; Details                                                                                                  ;
++-----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; rst_n     ; Input  ; Info     ; Stuck at VCC                                                                                             ;
+; locked    ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
+; debug_cnt ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++-----------+--------+----------+----------------------------------------------------------------------------------------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:06     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus II 64-Bit Analysis & Synthesis
+    Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+    Info: Processing started: Thu Jun 25 17:57:27 2026
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off DLIA -c DLIA
+Info (11104): Parallel Compilation has detected 8 hyper-threaded processors. However, the extra hyper-threaded processors will not be used by default. Parallel Compilation will use 4 of the 4 physical processors detected instead.
+Info (12021): Found 1 design units, including 1 entities, in source file spi_test.bdf
+    Info (12023): Found entity 1: Spi_test
+Info (12021): Found 1 design units, including 1 entities, in source file frequency_tracker_test.bdf
+    Info (12023): Found entity 1: frequency_tracker_test
+Info (12021): Found 1 design units, including 1 entities, in source file spi_interface.v
+    Info (12023): Found entity 1: spi_interface
+Info (12021): Found 1 design units, including 1 entities, in source file multiplier.v
+    Info (12023): Found entity 1: multiplier
+Info (12021): Found 1 design units, including 1 entities, in source file lut_sincos_tb.v
+    Info (12023): Found entity 1: lut_sincos_tb
+Info (12021): Found 1 design units, including 1 entities, in source file lut_sincos.v
+    Info (12023): Found entity 1: lut_sincos
+Info (12021): Found 1 design units, including 1 entities, in source file lut_signal.v
+    Info (12023): Found entity 1: lut_signal
+Info (12021): Found 1 design units, including 1 entities, in source file integrate_and_dump.v
+    Info (12023): Found entity 1: integrate_and_dump
+Info (12021): Found 1 design units, including 1 entities, in source file frequency_tracker_sync.v
+    Info (12023): Found entity 1: frequency_tracker_sync
+Info (12021): Found 1 design units, including 1 entities, in source file dlia.v
+    Info (12023): Found entity 1: DLIA
+Info (12021): Found 1 design units, including 1 entities, in source file data_delay_block.v
+    Info (12023): Found entity 1: data_delay_block
+Info (12021): Found 1 design units, including 1 entities, in source file cordic_top.v
+    Info (12023): Found entity 1: cordic_top
+Info (12021): Found 1 design units, including 1 entities, in source file cordic_stage.v
+    Info (12023): Found entity 1: cordic_stage
+Info (12021): Found 1 design units, including 1 entities, in source file calibration.v
+    Info (12023): Found entity 1: calibration
+Info (12021): Found 1 design units, including 1 entities, in source file pll/phase_locked_loop.v
+    Info (12023): Found entity 1: phase_locked_loop
+Critical Warning (10846): Verilog HDL Instantiation warning at DLIA.v(24): instance has no name
+Info (12127): Elaborating entity "DLIA" for the top level hierarchy
+Info (12128): Elaborating entity "frequency_tracker_sync" for hierarchy "frequency_tracker_sync:comb_3"
+Info (12128): Elaborating entity "phase_locked_loop" for hierarchy "phase_locked_loop:p_ll"
+Info (12128): Elaborating entity "altpll" for hierarchy "phase_locked_loop:p_ll|altpll:altpll_component"
+Info (12130): Elaborated megafunction instantiation "phase_locked_loop:p_ll|altpll:altpll_component"
+Info (12133): Instantiated megafunction "phase_locked_loop:p_ll|altpll:altpll_component" with the following parameter:
+    Info (12134): Parameter "bandwidth_type" = "AUTO"
+    Info (12134): Parameter "clk0_divide_by" = "125"
+    Info (12134): Parameter "clk0_duty_cycle" = "50"
+    Info (12134): Parameter "clk0_multiply_by" = "8"
+    Info (12134): Parameter "clk0_phase_shift" = "0"
+    Info (12134): Parameter "compensate_clock" = "CLK0"
+    Info (12134): Parameter "inclk0_input_frequency" = "20000"
+    Info (12134): Parameter "intended_device_family" = "Cyclone IV E"
+    Info (12134): Parameter "lpm_hint" = "CBX_MODULE_PREFIX=phase_locked_loop"
+    Info (12134): Parameter "lpm_type" = "altpll"
+    Info (12134): Parameter "operation_mode" = "NORMAL"
+    Info (12134): Parameter "pll_type" = "AUTO"
+    Info (12134): Parameter "port_activeclock" = "PORT_UNUSED"
+    Info (12134): Parameter "port_areset" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clkbad0" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clkbad1" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clkloss" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clkswitch" = "PORT_UNUSED"
+    Info (12134): Parameter "port_configupdate" = "PORT_UNUSED"
+    Info (12134): Parameter "port_fbin" = "PORT_UNUSED"
+    Info (12134): Parameter "port_inclk0" = "PORT_USED"
+    Info (12134): Parameter "port_inclk1" = "PORT_UNUSED"
+    Info (12134): Parameter "port_locked" = "PORT_UNUSED"
+    Info (12134): Parameter "port_pfdena" = "PORT_UNUSED"
+    Info (12134): Parameter "port_phasecounterselect" = "PORT_UNUSED"
+    Info (12134): Parameter "port_phasedone" = "PORT_UNUSED"
+    Info (12134): Parameter "port_phasestep" = "PORT_UNUSED"
+    Info (12134): Parameter "port_phaseupdown" = "PORT_UNUSED"
+    Info (12134): Parameter "port_pllena" = "PORT_UNUSED"
+    Info (12134): Parameter "port_scanaclr" = "PORT_UNUSED"
+    Info (12134): Parameter "port_scanclk" = "PORT_UNUSED"
+    Info (12134): Parameter "port_scanclkena" = "PORT_UNUSED"
+    Info (12134): Parameter "port_scandata" = "PORT_UNUSED"
+    Info (12134): Parameter "port_scandataout" = "PORT_UNUSED"
+    Info (12134): Parameter "port_scandone" = "PORT_UNUSED"
+    Info (12134): Parameter "port_scanread" = "PORT_UNUSED"
+    Info (12134): Parameter "port_scanwrite" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clk0" = "PORT_USED"
+    Info (12134): Parameter "port_clk1" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clk2" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clk3" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clk4" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clk5" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clkena0" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clkena1" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clkena2" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clkena3" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clkena4" = "PORT_UNUSED"
+    Info (12134): Parameter "port_clkena5" = "PORT_UNUSED"
+    Info (12134): Parameter "port_extclk0" = "PORT_UNUSED"
+    Info (12134): Parameter "port_extclk1" = "PORT_UNUSED"
+    Info (12134): Parameter "port_extclk2" = "PORT_UNUSED"
+    Info (12134): Parameter "port_extclk3" = "PORT_UNUSED"
+    Info (12134): Parameter "width_clock" = "5"
+Info (12021): Found 1 design units, including 1 entities, in source file db/phase_locked_loop_altpll.v
+    Info (12023): Found entity 1: phase_locked_loop_altpll
+Info (12128): Elaborating entity "phase_locked_loop_altpll" for hierarchy "phase_locked_loop:p_ll|altpll:altpll_component|phase_locked_loop_altpll:auto_generated"
+Info (12128): Elaborating entity "spi_interface" for hierarchy "spi_interface:afe"
+Warning (10230): Verilog HDL assignment warning at spi_interface.v(116): truncated value with size 43 to match size of target (12)
+Info (12128): Elaborating entity "data_delay_block" for hierarchy "data_delay_block:delay"
+Warning (10036): Verilog HDL or VHDL warning at data_delay_block.v(10): object "buffer" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at data_delay_block.v(23): object "dv_spi_buffer" assigned a value but never read
+Info (12128): Elaborating entity "lut_sincos" for hierarchy "lut_sincos:dds"
+Warning (10230): Verilog HDL assignment warning at lut_sincos.v(47): truncated value with size 32 to match size of target (10)
+Warning (10030): Net "sine_lut.data_a" at lut_sincos.v(52) has no driver or initial value, using a default initial value '0'
+Warning (10030): Net "sine_lut.waddr_a" at lut_sincos.v(52) has no driver or initial value, using a default initial value '0'
+Warning (10030): Net "sine_lut.we_a" at lut_sincos.v(52) has no driver or initial value, using a default initial value '0'
+Info (12128): Elaborating entity "multiplier" for hierarchy "multiplier:sine_mix"
+Info (12128): Elaborating entity "integrate_and_dump" for hierarchy "integrate_and_dump:sine_filter"
+Info (12128): Elaborating entity "calibration" for hierarchy "calibration:calibrate"
+Info (12128): Elaborating entity "cordic_top" for hierarchy "cordic_top:CORDIC"
+Info (12128): Elaborating entity "cordic_stage" for hierarchy "cordic_top:CORDIC|cordic_stage:stage1"
+Info (12128): Elaborating entity "cordic_stage" for hierarchy "cordic_top:CORDIC|cordic_stage:pipeline_gen[0].stage_inst"
+Info (12128): Elaborating entity "cordic_stage" for hierarchy "cordic_top:CORDIC|cordic_stage:pipeline_gen[1].stage_inst"
+Info (12128): Elaborating entity "cordic_stage" for hierarchy "cordic_top:CORDIC|cordic_stage:pipeline_gen[2].stage_inst"
+Info (12128): Elaborating entity "cordic_stage" for hierarchy "cordic_top:CORDIC|cordic_stage:pipeline_gen[3].stage_inst"
+Info (12128): Elaborating entity "cordic_stage" for hierarchy "cordic_top:CORDIC|cordic_stage:pipeline_gen[4].stage_inst"
+Info (12128): Elaborating entity "cordic_stage" for hierarchy "cordic_top:CORDIC|cordic_stage:pipeline_gen[5].stage_inst"
+Info (12128): Elaborating entity "cordic_stage" for hierarchy "cordic_top:CORDIC|cordic_stage:pipeline_gen[6].stage_inst"
+Info (12128): Elaborating entity "cordic_stage" for hierarchy "cordic_top:CORDIC|cordic_stage:pipeline_gen[7].stage_inst"
+Info (12128): Elaborating entity "cordic_stage" for hierarchy "cordic_top:CORDIC|cordic_stage:pipeline_gen[8].stage_inst"
+Info (12128): Elaborating entity "cordic_stage" for hierarchy "cordic_top:CORDIC|cordic_stage:pipeline_gen[9].stage_inst"
+Info (12128): Elaborating entity "cordic_stage" for hierarchy "cordic_top:CORDIC|cordic_stage:pipeline_gen[10].stage_inst"
+Info (12128): Elaborating entity "cordic_stage" for hierarchy "cordic_top:CORDIC|cordic_stage:pipeline_gen[11].stage_inst"
+Info (12128): Elaborating entity "cordic_stage" for hierarchy "cordic_top:CORDIC|cordic_stage:pipeline_gen[12].stage_inst"
+Info (12128): Elaborating entity "cordic_stage" for hierarchy "cordic_top:CORDIC|cordic_stage:pipeline_gen[13].stage_inst"
+Info (12128): Elaborating entity "cordic_stage" for hierarchy "cordic_top:CORDIC|cordic_stage:pipeline_gen[14].stage_inst"
+Info (12128): Elaborating entity "cordic_stage" for hierarchy "cordic_top:CORDIC|cordic_stage:pipeline_gen[15].stage_inst"
+Info (12128): Elaborating entity "cordic_stage" for hierarchy "cordic_top:CORDIC|cordic_stage:pipeline_gen[16].stage_inst"
+Info (12128): Elaborating entity "cordic_stage" for hierarchy "cordic_top:CORDIC|cordic_stage:pipeline_gen[17].stage_inst"
+Info (12128): Elaborating entity "cordic_stage" for hierarchy "cordic_top:CORDIC|cordic_stage:pipeline_gen[18].stage_inst"
+Info (12128): Elaborating entity "cordic_stage" for hierarchy "cordic_top:CORDIC|cordic_stage:pipeline_gen[19].stage_inst"
+Info (12128): Elaborating entity "cordic_stage" for hierarchy "cordic_top:CORDIC|cordic_stage:pipeline_gen[20].stage_inst"
+Info (12128): Elaborating entity "cordic_stage" for hierarchy "cordic_top:CORDIC|cordic_stage:pipeline_gen[21].stage_inst"
+Info (12128): Elaborating entity "cordic_stage" for hierarchy "cordic_top:CORDIC|cordic_stage:pipeline_gen[22].stage_inst"
+Info (12128): Elaborating entity "cordic_stage" for hierarchy "cordic_top:CORDIC|cordic_stage:pipeline_gen[23].stage_inst"
+Info (12128): Elaborating entity "cordic_stage" for hierarchy "cordic_top:CORDIC|cordic_stage:pipeline_gen[24].stage_inst"
+Info (12128): Elaborating entity "cordic_stage" for hierarchy "cordic_top:CORDIC|cordic_stage:pipeline_gen[25].stage_inst"
+Info (12128): Elaborating entity "cordic_stage" for hierarchy "cordic_top:CORDIC|cordic_stage:pipeline_gen[26].stage_inst"
+Info (12128): Elaborating entity "cordic_stage" for hierarchy "cordic_top:CORDIC|cordic_stage:pipeline_gen[27].stage_inst"
+Info (12128): Elaborating entity "cordic_stage" for hierarchy "cordic_top:CORDIC|cordic_stage:pipeline_gen[28].stage_inst"
+Info (19000): Inferred 1 megafunctions from design logic
+    Info (276029): Inferred altsyncram megafunction from the following design logic: "lut_sincos:dds|sine_lut_rtl_0" 
+        Info (286033): Parameter OPERATION_MODE set to BIDIR_DUAL_PORT
+        Info (286033): Parameter WIDTH_A set to 12
+        Info (286033): Parameter WIDTH_B set to 12
+        Info (286033): Parameter WIDTHAD_A set to 10
+        Info (286033): Parameter WIDTHAD_B set to 10
+        Info (286033): Parameter NUMWORDS_A set to 1024
+        Info (286033): Parameter NUMWORDS_B set to 1024
+        Info (286033): Parameter OUTDATA_REG_A set to UNREGISTERED
+        Info (286033): Parameter OUTDATA_REG_B set to UNREGISTERED
+        Info (286033): Parameter ADDRESS_REG_B set to CLOCK0
+        Info (286033): Parameter INDATA_REG_B set to CLOCK0
+        Info (286033): Parameter WRCONTROL_WRADDRESS_REG_B set to CLOCK0
+        Info (286033): Parameter INDATA_ACLR_A set to NONE
+        Info (286033): Parameter WRCONTROL_ACLR_A set to NONE
+        Info (286033): Parameter ADDRESS_ACLR_A set to NONE
+        Info (286033): Parameter ADDRESS_ACLR_B set to NONE
+        Info (286033): Parameter OUTDATA_ACLR_B set to NONE
+        Info (286033): Parameter RAM_BLOCK_TYPE set to M9K
+        Info (286033): Parameter INIT_FILE set to db/DLIA.ram0_lut_sincos_bd5504ff.hdl.mif
+Info (278001): Inferred 4 megafunctions from design logic
+    Info (278002): Inferred adder/subtractor megafunction ("lpm_add_sub") from the following logic: "cordic_top:CORDIC|cordic_stage:stage1|Add0"
+    Info (278002): Inferred adder/subtractor megafunction ("lpm_add_sub") from the following logic: "cordic_top:CORDIC|cordic_stage:stage1|Add0"
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "multiplier:cosine_mix|Mult0"
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "multiplier:sine_mix|Mult0"
+Info (12130): Elaborated megafunction instantiation "lut_sincos:dds|altsyncram:sine_lut_rtl_0"
+Info (12133): Instantiated megafunction "lut_sincos:dds|altsyncram:sine_lut_rtl_0" with the following parameter:
+    Info (12134): Parameter "OPERATION_MODE" = "BIDIR_DUAL_PORT"
+    Info (12134): Parameter "WIDTH_A" = "12"
+    Info (12134): Parameter "WIDTH_B" = "12"
+    Info (12134): Parameter "WIDTHAD_A" = "10"
+    Info (12134): Parameter "WIDTHAD_B" = "10"
+    Info (12134): Parameter "NUMWORDS_A" = "1024"
+    Info (12134): Parameter "NUMWORDS_B" = "1024"
+    Info (12134): Parameter "OUTDATA_REG_A" = "UNREGISTERED"
+    Info (12134): Parameter "OUTDATA_REG_B" = "UNREGISTERED"
+    Info (12134): Parameter "ADDRESS_REG_B" = "CLOCK0"
+    Info (12134): Parameter "INDATA_REG_B" = "CLOCK0"
+    Info (12134): Parameter "WRCONTROL_WRADDRESS_REG_B" = "CLOCK0"
+    Info (12134): Parameter "INDATA_ACLR_A" = "NONE"
+    Info (12134): Parameter "WRCONTROL_ACLR_A" = "NONE"
+    Info (12134): Parameter "ADDRESS_ACLR_A" = "NONE"
+    Info (12134): Parameter "ADDRESS_ACLR_B" = "NONE"
+    Info (12134): Parameter "OUTDATA_ACLR_B" = "NONE"
+    Info (12134): Parameter "RAM_BLOCK_TYPE" = "M9K"
+    Info (12134): Parameter "INIT_FILE" = "db/DLIA.ram0_lut_sincos_bd5504ff.hdl.mif"
+Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_1sq1.tdf
+    Info (12023): Found entity 1: altsyncram_1sq1
+Info (12130): Elaborated megafunction instantiation "cordic_top:CORDIC|cordic_stage:stage1|lpm_add_sub:Add0"
+Info (12133): Instantiated megafunction "cordic_top:CORDIC|cordic_stage:stage1|lpm_add_sub:Add0" with the following parameter:
+    Info (12134): Parameter "LPM_WIDTH" = "31"
+    Info (12134): Parameter "LPM_DIRECTION" = "DEFAULT"
+    Info (12134): Parameter "LPM_REPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "ONE_INPUT_IS_CONSTANT" = "NO"
+Info (12021): Found 1 design units, including 1 entities, in source file db/add_sub_ovi.tdf
+    Info (12023): Found entity 1: add_sub_ovi
+Info (12130): Elaborated megafunction instantiation "multiplier:cosine_mix|lpm_mult:Mult0"
+Info (12133): Instantiated megafunction "multiplier:cosine_mix|lpm_mult:Mult0" with the following parameter:
+    Info (12134): Parameter "LPM_WIDTHA" = "12"
+    Info (12134): Parameter "LPM_WIDTHB" = "12"
+    Info (12134): Parameter "LPM_WIDTHP" = "24"
+    Info (12134): Parameter "LPM_WIDTHR" = "24"
+    Info (12134): Parameter "LPM_WIDTHS" = "1"
+    Info (12134): Parameter "LPM_REPRESENTATION" = "SIGNED"
+    Info (12134): Parameter "INPUT_A_IS_CONSTANT" = "NO"
+    Info (12134): Parameter "INPUT_B_IS_CONSTANT" = "NO"
+    Info (12134): Parameter "MAXIMIZE_SPEED" = "6"
+Info (12021): Found 1 design units, including 1 entities, in source file db/mult_t5t.tdf
+    Info (12023): Found entity 1: mult_t5t
+Warning (12241): 4 hierarchies have connectivity warnings - see the Connectivity Checks report folder
+Warning (13024): Output pins are stuck at VCC or GND
+    Warning (13410): Pin "phase[0]" is stuck at VCC
+Info (286030): Timing-Driven Synthesis is running
+Info (17049): 16 registers lost all their fanouts during netlist optimizations.
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 1 node(s), including 0 DDIO, 1 PLL, 0 transceiver and 0 LCELL
+Warning (21074): Design contains 1 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "rst_n"
+Info (21057): Implemented 4991 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 4 input pins
+    Info (21059): Implemented 112 output pins
+    Info (21061): Implemented 4858 logic cells
+    Info (21064): Implemented 12 RAM segments
+    Info (21065): Implemented 1 PLLs
+    Info (21062): Implemented 4 DSP elements
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 13 warnings
+    Info: Peak virtual memory: 4679 megabytes
+    Info: Processing ended: Thu Jun 25 17:57:37 2026
+    Info: Elapsed time: 00:00:10
+    Info: Total CPU time (on all processors): 00:00:10
+
+

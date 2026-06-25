@@ -1,0 +1,43 @@
+module lut_signal #(
+    parameter PHASE_WIDTH = 32,
+    parameter ADDR_WIDTH  = 10,
+    parameter DATA_WIDTH  = 12
+)(
+    input  wire                          clk,
+    input  wire                          rst,
+    input  wire [PHASE_WIDTH-1:0]        phase_step,
+    input  wire [PHASE_WIDTH-1:0]        phase_offset,
+    output reg  signed [DATA_WIDTH-1:0]  sine_wave,
+    output reg  signed [DATA_WIDTH-1:0]  sine_wave_shifted
+);
+
+// Phase accumulator
+reg [PHASE_WIDTH-1:0] phase;
+always @(posedge clk) begin
+    if (!rst)
+        phase <= 32'b0;
+    else
+        phase <= phase + phase_step;
+end
+
+// Index extraction
+wire [ADDR_WIDTH-1:0] index_sine;
+wire [ADDR_WIDTH-1:0] index_sine_shifted;
+
+assign index_sine         = phase[PHASE_WIDTH-1 : PHASE_WIDTH-ADDR_WIDTH];
+assign index_sine_shifted = (phase + phase_offset)[PHASE_WIDTH-1 : PHASE_WIDTH-ADDR_WIDTH];
+
+// LUT
+(* ramstyle = "M9K" *)
+reg signed [DATA_WIDTH-1:0] sine_lut [0:(1<<ADDR_WIDTH)-1];
+initial begin
+    $readmemh("sine_lut.hex", sine_lut);
+end
+
+// Output register
+always @(posedge clk) begin
+    sine_wave         <= sine_lut[index_sine];
+    sine_wave_shifted <= sine_lut[index_sine_shifted];
+end
+
+endmodule

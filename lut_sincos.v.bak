@@ -1,0 +1,43 @@
+module lut_sincos #(
+    parameter PHASE_WIDTH = 32,
+    parameter ADDR_WIDTH  = 10,  // 1024 samples
+    parameter DATA_WIDTH  = 12
+)(
+    input wire clk,
+    input wire rst,
+    input wire [PHASE_WIDTH-1:0] phase_step, 
+    output reg [DATA_WIDTH-1:0] sine_wave,
+    output reg [DATA_WIDTH-1:0] cosine_wave
+);
+
+reg [PHASE_WIDTH-1:0] phase = 0;
+always @ (posedge clk or negedge rst) begin
+     if(rst) 
+	     begin
+				phase <= phase + phase_step;
+        end 
+	  else 
+	     begin
+				phase <= 0'b32;
+		  end
+end
+
+
+wire[ADDR_WIDTH-1:0] index_sine;
+assign index_sine = phase[PHASE_WIDTH-1 : PHASE_WIDTH - ADDR_WIDTH];
+				   
+wire[ADDR_WIDTH-1:0] index_cosine;
+assign index_sine = phase[PHASE_WIDTH-1 : PHASE_WIDTH - ADDR_WIDTH] + (1 << (ADDR_WIDTH-2); // + 90 degree
+
+
+(* ramstyle = "M9K" *) reg signed [DATA_WIDTH-1:0] sine_lut [0:ADDR_WIDTH-1];
+initial begin
+    $readmemh("sine_lut.hex", sine_lut);
+end 
+
+always @ (posedge clk) begin
+    sine_wave <= lut[index_sine];
+	 cosine_wave <= lut[index_cosine];
+end
+
+endmodole 

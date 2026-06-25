@@ -1,0 +1,10 @@
+module EIS(input clk
+              input [23:0] product);
+				  
+wire [11:0]sine_wire;
+wire [11:0]cos_wire;				  
+lut_sincose lut1 (.clk(clk), .rst(1), .phase_step(32'd85_899_346), .sine_wave(sine_wire), .cosine_wave(cos_wire));
+
+multiplier  mul1 (.AFE(sine_wire), .REF(cos_wire), .product(product));
+
+endmodule 

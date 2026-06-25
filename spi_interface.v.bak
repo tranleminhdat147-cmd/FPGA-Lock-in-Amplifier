@@ -1,0 +1,96 @@
+module spi_interface(
+    input clk,             // High-speed system clock (e.g., from PLL)
+    output wire sclk,      // SPI Serial Clock sent to ADC
+    output reg din,        // SPI Data Out (MOSI) - used for channel address
+    input dout,            // SPI Data In (MISO) - 12-bit result from ADC
+    output reg cs,         // Chip Select (Active Low)
+    output reg [3:0] count, // 4-bit counter for the 16-cycle SPI frame
+    output reg [11:0] dataout,  // Channel A result (e.g., Voltage)
+    output reg [11:0] dataout2, // Channel B result (e.g., Current)
+    output reg clock_out        // Data-ready strobe for your DLIA logic
+);
+
+    reg [11:0] data_temp;  // Shift register to assemble the incoming bits
+    reg ADD2, ADD1, ADD0;  // Bits to define the ADC channel (0-7)
+
+    initial begin
+        count = 4'd0;
+        cs = 1'b1;         // Start with ADC disabled
+        ADD2 = 1'b0;
+        ADD1 = 1'b1;       // Defaulting to a specific channel start
+        ADD0 = 1'b0;
+        clock_out = 1'b0;
+        dataout = 12'd0;
+        dataout2 = 12'd0;
+        data_temp = 12'd0;
+    end
+
+    // --- Clock Gating ---
+    // SCLK only toggles when CS is low. When idle, SCLK stays high.
+    assign sclk = cs ? 1'b1 : clk;
+
+    // --- Frame Counter ---
+    // Increments every clock cycle to track which bit is being processed
+    always @(posedge clk) begin
+        count <= count + 4'd1;
+    end
+
+    // --- Chip Select Control ---
+    // CS goes low on count 1 to start the SPI transaction
+    always @(negedge clk) begin
+        if (count == 4'd1) begin
+            cs <= 1'b0;
+        end
+        // Note: You should ideally set CS back to 1 at count 15 or 0 
+        // to end the transaction, but this code keeps it low for now.
+    end
+
+    // --- Sending Channel Address (MOSI) ---
+    // The ADC128S022 expects the channel address on bits 3, 4, and 5.
+    always @(negedge clk) begin
+        case (count)
+            4'd3: din <= ADD2;
+            4'd4: din <= ADD1;
+            4'd5: begin 
+                din <= ADD0;
+                ADD1 <= !ADD1; // TOGGLE: Cycles between two channels (e.g., CH 2 and CH 6)
+            end
+            default: din <= 1'b0;
+        endcase
+    end
+
+    // --- Receiving Data (MISO) ---
+    // Captures bits one-by-one from the ADC into data_temp
+    always @(posedge clk) begin
+        case (count)
+            // At count 4, save the COMPLETE previous sample to the output registers
+            4'd4: begin
+                if (ADD1 == 1'b1) 
+                    dataout <= data_temp;
+                else
+                    dataout2 <= data_temp;
+            end
+            
+            // Capture 12 bits from MSB to LSB
+            4'd5:  data_temp[11] <= dout;
+            4'd6:  data_temp[10] <= dout;
+            4'd7:  data_temp[9]  <= dout;
+            4'd8:  data_temp[8]  <= dout;
+            4'd9:  begin
+                data_temp[7] <= dout;
+                clock_out <= 1'b1; // Pulse 'Data Ready' high for the DLIA
+            end
+            4'd10: begin
+                data_temp[6] <= dout;
+                clock_out <= 1'b0; // Pull 'Data Ready' low
+            end
+            4'd11: data_temp[5] <= dout;
+            4'd12: data_temp[4] <= dout;
+            4'd13: data_temp[3] <= dout;
+            4'd14: data_temp[2] <= dout;
+            4'd15: data_temp[1] <= dout;
+            4'd0:  data_temp[0] <= dout;
+        endcase
+    end
+
+endmodule

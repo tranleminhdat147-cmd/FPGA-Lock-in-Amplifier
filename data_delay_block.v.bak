@@ -1,0 +1,21 @@
+module data_delay_block # 
+( parameter DATA_WIDTH = 12
+)(input clk,
+  input rst_n,
+  input reg [DATA_WIDTH:0] data_in,
+  input reg [DATA_WIDTH:0] data_out);
+  
+  reg [DATA_WIDTH:0] buffer;
+  
+  always @ (posedge clk or negedge rst_n) begin 
+       if (!rst_n) begin
+		    data_out <= {DATA_WIDTH{1'b0}};
+			 buffer <= {DATA_WIDTH{1'b0}};
+		 end 
+		 else begin
+		    buffer <= data_in;
+			 data_out <= buffer;
+		end
+	end
+
+endmodule 

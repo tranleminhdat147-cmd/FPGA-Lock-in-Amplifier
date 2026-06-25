@@ -1,0 +1,5 @@
+PLL_Name	phase_locked_loop:p_ll|altpll:altpll_component|phase_locked_loop_altpll:auto_generated|pll1
+PLLJITTER	41
+PLLSPEmax	84
+PLLSPEmin	-53
+

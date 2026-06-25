@@ -1,0 +1,79 @@
+module frequency_tracker_sync (
+    // Inputs
+    input  wire        clk,          // Xung nhịp hệ thống (VD: 50MHz)
+    input  wire        rst_n,        // Reset tích cực mức thấp
+    input  wire        ttl_in,       // Tín hiệu TTL từ máy phát hàm
+    
+    // Outputs
+    output reg  [31:0] phase_step,   // Bước nhảy pha đẩy sang module lut_sincos
+    output reg         locked,       // Cờ báo hệ thống đã chốt được tần số
+    output wire        ttl_rise_out, // <--- ĐÃ PHỤC HỒI: Xung trigger chọc sang DDS để Reset Pha
+    output wire [31:0] debug_cnt     // Port debug xuất số đếm trực tiếp lên SignalTap
+);
+
+    // =========================================================================
+    // 1. 3FF SYNCHRONIZER & EDGE DETECTOR
+    // =========================================================================
+    reg ttl_r1, ttl_r2, ttl_r3;
+
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            ttl_r1 <= 1'b0;
+            ttl_r2 <= 1'b0;
+            ttl_r3 <= 1'b0;
+        end else begin
+            ttl_r1 <= ttl_in;   
+            ttl_r2 <= ttl_r1;   
+            ttl_r3 <= ttl_r2;   
+        end
+    end
+
+    // Dò sườn lên và tống thẳng ra ngõ ra cho DDS
+    wire ttl_rise = ttl_r2 & ~ttl_r3;
+    assign ttl_rise_out = ttl_rise; 
+    
+    // =========================================================================
+    // 2. FREQUENCY TRACKER (Kiến trúc Cửa sổ - Chống Jitter)
+    // =========================================================================
+    reg [31:0] period_cnt;
+    
+    // Nối thẳng bộ đếm nội bộ ra port debug
+    assign debug_cnt = period_cnt;
+
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            period_cnt <= 32'd0;
+            phase_step <= 32'd0;
+            locked     <= 1'b0;
+        end else begin
+            // Bộ đếm luôn chạy
+            period_cnt <= period_cnt + 32'd1;
+            
+            if (ttl_rise) begin
+                // Tần số 100 Hz (Tâm: 500,000. Cửa sổ: ±500)
+                if (period_cnt > 32'd499500 && period_cnt < 32'd500500) begin
+                    phase_step <= 32'd8590; 
+                    locked     <= 1'b1;
+                end
+                // Tần số 1 kHz (Tâm: 50,000. Cửa sổ: ±100)
+                else if (period_cnt > 32'd49900 && period_cnt < 32'd50100) begin
+                    phase_step <= 32'd85899;
+                    locked     <= 1'b1;
+                end
+                // Tần số 10 kHz (Tâm: 5,000. Cửa sổ: ±50)
+                else if (period_cnt > 32'd4950 && period_cnt < 32'd5050) begin
+                    phase_step <= 32'd858993;
+                    locked     <= 1'b1;
+                end
+                // Nằm ngoài dải quy định -> Báo mất khóa pha/tần số
+                else begin
+                    locked <= 1'b0;
+                end
+                
+                // Trả về 0 để đếm chu kỳ mới
+                period_cnt <= 32'd0; 
+            end
+        end
+    end
+
+endmodule
