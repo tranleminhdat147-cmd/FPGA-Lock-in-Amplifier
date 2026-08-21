@@ -1,4 +1,4 @@
-module DLIA(input clk,
+module DLIA (input clk,
            input rst_n,
           
           // TTL
@@ -15,7 +15,11 @@ module DLIA(input clk,
           //cordic
           output [31:0] N_sample_out,
           output [31:0] phase,
-          output [31:0] magnitude
+          output [31:0] magnitude,
+			 output valid_cordic,
+			 
+			 //uart
+			 output UART_TX_PIN
           ); 
 // Phase sync and frequency tracker
 wire [31:0] phase_step;
@@ -102,15 +106,58 @@ wire [29:0] sine_filtered_calibrated;
 wire [29:0] cosine_filtered_calibrated;
 
 assign enable_cordic = data_valid_sine_sma & data_valid_cosine_sma;
-
+wire data_valid_cordic;
+assign valid_cordic = data_valid_cordic;
 // After mixing, the signal amplitude is increased by a factor of 1024. Therefore, the data is right-shifted by 10 bits before being processed by the CORDIC block.;
 calibration calibrate (.datain_a(sine_filtered), .datain_b(cosine_filtered), .dataout_a(sine_filtered_calibrated), .dataout_b(cosine_filtered_calibrated));
 
 cordic_top #(.IN_WIDTH(30), .OUT_WIDTH(32)) CORDIC (.clk(clk),
                                                     .valid_in(enable_cordic),
+													.valid_out(data_valid_cordic),
                                                     .x_in(sine_filtered_calibrated),
                                                     .y_in(cosine_filtered_calibrated),
                                                     .z_in(30'b0),
                                                     .x_out(magnitude),
                                                     .z_out(phase));
+																	 
+// Communication - UART FIFO;
+wire fifo_empty, fifo_rdreq; 
+wire [95:0] fifo_data;
+wire tx_ready, tx_start, tx_active;
+assign tx_ready = ~tx_active;
+wire [7:0] tx_data;
+
+Fifo fifo_inst (.clock(clk),
+                .data({magnitude, phase, N_sample_out}),
+					 .rdreq(fifo_rdreq),
+					 .wrreq (data_valid_cordic),
+					 .empty(fifo_empty),
+					 .q(fifo_data));
+
+				 
+uart_packetizer  uart_packetizer_inst (.clk(clk),
+                                    .rst_n(1'b1),
+									.fifo_empty(fifo_empty),
+									.fifo_data(fifo_data),
+									.fifo_rdreq(fifo_rdreq),
+									.tx_ready(tx_ready),
+									.tx_start(tx_start),
+									.tx_data(tx_data));
+
+
+UART_TX #(
+    .CLKS_PER_BIT(434)  
+) u_uart_tx_inst (
+    .Rst_L      (1'b1),         
+    .Clock      (clk),            
+    
+    
+    .TX_DV      (tx_start),   
+    .TX_Byte    (tx_data),    
+    
+   
+    .TX_Active  (tx_active),  
+    .TX_Serial  (UART_TX_PIN)     
+);			
+
 endmodule
