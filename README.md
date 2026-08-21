@@ -14,7 +14,7 @@ A dedicated FSM (IDLE → LATCH → SEND_BYTE → WAIT_ACK → WAIT_DONE) sits b
 
 The UART TX core is a standard serial transmitter (start bit → 8 data bits → stop bit) implemented as its own FSM. It exposes a simple byte-oriented handshake accepting one byte at a time on request and asserting a ready flag when free so the packetizer can treat it as a decoupled shift-out engine and burst an entire 13-byte packet per frequency sweep point without needing to manage bit-level timing itself.
 
-Key design points
+Key design points:
 Clock-domain crossing between the SPI/ADC sampling domain and the main processing domain is handled with a synchronizer + edge-detector to guarantee single-cycle valid pulses
 Sample count (N) is tracked per integration window to support frequency-adaptive normalization
 Bit-width and CORDIC scaling are derived analytically from worst-case accumulator bounds, not arbitrarily chosen
