@@ -25,7 +25,7 @@ module DLIA (input clk,
 wire [31:0] phase_step;
 wire ttl_rise_out;
 
-frequency_tracker_sync (.clk(clk), .rst_n(1'b1), .ttl_in(ttl_in), .phase_step(phase_step), .ttl_rise_out(ttl_rise_out));
+frequency_tracker_sync freq_trk (.clk(clk), .rst_n(1'b1), .ttl_in(ttl_in), .phase_step(phase_step), .ttl_rise_out(ttl_rise_out));
           
 // spi
 wire SPI_sclk;
@@ -113,7 +113,7 @@ calibration calibrate (.datain_a(sine_filtered), .datain_b(cosine_filtered), .da
 
 cordic_top #(.IN_WIDTH(30), .OUT_WIDTH(32)) CORDIC (.clk(clk),
                                                     .valid_in(enable_cordic),
-													.valid_out(data_valid_cordic),
+																	 .valid_out(data_valid_cordic),
                                                     .x_in(sine_filtered_calibrated),
                                                     .y_in(cosine_filtered_calibrated),
                                                     .z_in(30'b0),
@@ -137,12 +137,12 @@ Fifo fifo_inst (.clock(clk),
 				 
 uart_packetizer  uart_packetizer_inst (.clk(clk),
                                     .rst_n(1'b1),
-									.fifo_empty(fifo_empty),
-									.fifo_data(fifo_data),
-									.fifo_rdreq(fifo_rdreq),
-									.tx_ready(tx_ready),
-									.tx_start(tx_start),
-									.tx_data(tx_data));
+												.fifo_empty(fifo_empty),
+												.fifo_data(fifo_data),
+												.fifo_rdreq(fifo_rdreq),
+												.tx_ready(tx_ready),
+												.tx_start(tx_start),
+												.tx_data(tx_data));
 
 
 UART_TX #(
